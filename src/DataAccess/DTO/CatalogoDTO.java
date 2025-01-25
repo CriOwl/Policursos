@@ -1,10 +1,10 @@
 package DataAccess.DTO;
 public class CatalogoDTO {
-    private Integer IdCatalogo;       
+    private Integer Id_Catalogo;       
     private String  Nombre;       
     private String  Estado;       
-    private String  FechaCrea;    
-    private String  FechaModifica;
+    private String  Fecha_creacion;    
+    private String  Fecha_modificacion;
     
     
     public CatalogoDTO(){ }
@@ -13,19 +13,19 @@ public class CatalogoDTO {
         this.Nombre = nombre;
     }
 
-    public CatalogoDTO(int idCatalogo, String nombre, String estado, String fechaCrea, String fechaModifica) {
-        this.IdCatalogo = idCatalogo;
+    public CatalogoDTO(int id_Catalogo, String nombre, String estado, String fecha_creacion, String fecha_modificacion) {
+        this.Id_Catalogo = id_Catalogo;
         this.Nombre = nombre;
         this.Estado = estado;
-        this.FechaCrea = fechaCrea;
-        this.FechaModifica = fechaModifica;
+        this.Fecha_creacion = fecha_creacion;
+        this.Fecha_modificacion = fecha_modificacion;
     }
     
-    public Integer getIdCatalogo() {
-        return IdCatalogo;
+    public Integer getId_Catalogo() {
+        return Id_Catalogo;
     }
-    public void setIdCatalogo(Integer idCatalogo) {
-        IdCatalogo = idCatalogo;
+    public void setId_Catalogo(Integer id_Catalogo) {
+        Id_Catalogo = id_Catalogo;
     }
     public String getNombre() {
         return Nombre;
@@ -39,26 +39,26 @@ public class CatalogoDTO {
     public void setEstado(String estado) {
         Estado = estado;
     }
-    public String getFechaCrea() {
-        return FechaCrea;
+    public String getFecha_creacion() {
+        return Fecha_creacion;
     }
-    public void setFechaCrea(String fechaCrea) {
-        FechaCrea = fechaCrea;
+    public void setFecha_creacion(String fecha_creacion) {
+        Fecha_creacion = fecha_creacion;
     }
-    public String getFechaModifica() {
-        return FechaModifica;
+    public String getFecha_modificacion() {
+        return Fecha_modificacion;
     }
-    public void setFechaModifica(String fechaModifica) {
-        FechaModifica = fechaModifica;
+    public void setFecha_modificacion(String fecha_modificacion) {
+        Fecha_modificacion = fecha_modificacion;
     }
     @Override
     public String toString(){
         return getClass().getName()
-        + "\n IdCatalogo:       "+ getIdCatalogo()       
+        + "\n Id_Catalogo:       "+ getId_Catalogo()       
         + "\n Nombre:       "+ getNombre()       
         + "\n Estado:       "+ getEstado()       
-        + "\n FechaCrea:    "+ getFechaCrea()    
-        + "\n FechaModifica:"+ getFechaModifica();
+        + "\n Fecha_creacion:    "+ getFecha_creacion()    
+        + "\n Fecha_modificacion:"+ getFecha_modificacion();
     }
     
 }

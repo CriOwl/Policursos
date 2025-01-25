@@ -1,4 +1,4 @@
--- database: ../Base/policurso.sqlite
+-- database: ../Data_Base/policurso.sqlite
 
 INSERT INTO CATALOGO_TIPO ( nombre) VALUES
 ('Países'),
