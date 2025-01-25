@@ -30,7 +30,7 @@ public class CatalogoDAO extends SQLiteDataHelper implements IDAO<CatalogoDTO>{
             Statement  stmt = conn.createStatement();   // CRUD : select * ...    
             ResultSet rs   = stmt.executeQuery(query);  // ejecutar la
             while (rs.next()) {
-                oS = new CatalogoDTO(rs.getInt(1)       // IdCatalogo
+                oS = new CatalogoDTO(rs.getInt(1)       // Id_catalogo
                                 ,rs.getString(2)        // Nombre             
                                 ,rs.getString(3)        // Estado         
                                 ,rs.getString(4)        // Fecha_creacion      
@@ -59,7 +59,7 @@ public class CatalogoDAO extends SQLiteDataHelper implements IDAO<CatalogoDTO>{
             Statement  stmt = conn.createStatement();   // CRUD : select * ...    
             ResultSet rs   = stmt.executeQuery(query);    // ejecutar la
             while (rs.next()) {
-                CatalogoDTO s = new CatalogoDTO( rs.getInt(1)     // IdCatalogo
+                CatalogoDTO s = new CatalogoDTO( rs.getInt(1)     // Id_catalogo
                                         ,rs.getString(2)  // Nombre             
                                         ,rs.getString(3)  // Estado         
                                         ,rs.getString(4)  // Fecha_creacion      
@@ -92,7 +92,7 @@ public class CatalogoDAO extends SQLiteDataHelper implements IDAO<CatalogoDTO>{
     public boolean update(CatalogoDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
         LocalDateTime now = LocalDateTime.now();
-        String query = " UPDATE Catalogo SET Nombre = ?, Fecha_modificacion = ? WHERE IdCatalogo = ?";
+        String query = " UPDATE Catalogo SET Nombre = ?, Fecha_modificacion = ? WHERE Id_catalogo = ?";
         try {
             Connection          conn = openConnection();
             PreparedStatement pstmt  = conn.prepareStatement(query);
@@ -109,7 +109,7 @@ public class CatalogoDAO extends SQLiteDataHelper implements IDAO<CatalogoDTO>{
 
     @Override
     public boolean delete(Integer id) throws Exception {
-        String query = " UPDATE Catalogo SET Estado = ? WHERE IdCatalogo = ?";
+        String query = " UPDATE Catalogo SET Estado = ? WHERE Id_catalogo = ?";
         try {
             Connection          conn = openConnection();
             PreparedStatement  pstmt = conn.prepareStatement(query);

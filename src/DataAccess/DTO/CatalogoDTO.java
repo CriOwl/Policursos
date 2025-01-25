@@ -54,11 +54,11 @@ public class CatalogoDTO {
     @Override
     public String toString(){
         return getClass().getName()
-        + "\n Id_Catalogo:       "+ getId_Catalogo()       
-        + "\n Nombre:       "+ getNombre()       
-        + "\n Estado:       "+ getEstado()       
-        + "\n Fecha_creacion:    "+ getFecha_creacion()    
-        + "\n Fecha_modificacion:"+ getFecha_modificacion();
+        + "\n Id_Catalogo:          "+ getId_Catalogo()       
+        + "\n Nombre:               "+ getNombre()       
+        + "\n Estado:               "+ getEstado()       
+        + "\n Fecha_creacion:       "+ getFecha_creacion()    
+        + "\n Fecha_modificacion:   "+ getFecha_modificacion();
     }
     
 }
