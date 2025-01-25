@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public abstract class SQLiteDataHelper {
-    private static String DBPathConnection = "jdbc:sqlite:database//EXOBOT.sqlite"; 
+    private static String DBPathConnection = "jdbc:sqlite:Data_Base//policurso.sqlite"; 
     private static Connection conn = null;
-    protected SQLiteDataHelper(){    }
+    protected SQLiteDataHelper(){}
     
     protected static synchronized Connection openConnection() throws Exception{
         try {
