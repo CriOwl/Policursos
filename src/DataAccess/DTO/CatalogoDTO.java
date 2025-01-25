@@ -1,31 +1,31 @@
 package DataAccess.DTO;
-public class SexoDTO {
-    private Integer IdSexo;       
+public class CatalogoDTO {
+    private Integer IdCatalogo;       
     private String  Nombre;       
     private String  Estado;       
     private String  FechaCrea;    
     private String  FechaModifica;
     
     
-    public SexoDTO(){ }
+    public CatalogoDTO(){ }
 
-    public SexoDTO(String nombre) {
+    public CatalogoDTO(String nombre) {
         this.Nombre = nombre;
     }
 
-    public SexoDTO(int idSexo, String nombre, String estado, String fechaCrea, String fechaModifica) {
-        this.IdSexo = idSexo;
+    public CatalogoDTO(int idCatalogo, String nombre, String estado, String fechaCrea, String fechaModifica) {
+        this.IdCatalogo = idCatalogo;
         this.Nombre = nombre;
         this.Estado = estado;
         this.FechaCrea = fechaCrea;
         this.FechaModifica = fechaModifica;
     }
     
-    public Integer getIdSexo() {
-        return IdSexo;
+    public Integer getIdCatalogo() {
+        return IdCatalogo;
     }
-    public void setIdSexo(Integer idSexo) {
-        IdSexo = idSexo;
+    public void setIdCatalogo(Integer idCatalogo) {
+        IdCatalogo = idCatalogo;
     }
     public String getNombre() {
         return Nombre;
@@ -54,7 +54,7 @@ public class SexoDTO {
     @Override
     public String toString(){
         return getClass().getName()
-        + "\n IdSexo:       "+ getIdSexo()       
+        + "\n IdCatalogo:       "+ getIdCatalogo()       
         + "\n Nombre:       "+ getNombre()       
         + "\n Estado:       "+ getEstado()       
         + "\n FechaCrea:    "+ getFechaCrea()    

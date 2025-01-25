@@ -1,4 +1,4 @@
--- database: ../../Data_Base/policurso.sqlite
+-- database: ../Data_Base/policurso.sqlite
 DROP TABLE IF EXISTS NOTA;
 DROP TABLE IF EXISTS Estudiante_curso;
 DROP TABLE IF EXISTS Modulo_actividad;
