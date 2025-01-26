@@ -1,6 +1,6 @@
 -- database: ../Data_Base/policurso.sqlite
 
-INSERT INTO CATALOGO_TIPO ( nombre) VALUES
+INSERT INTO CATALOGO_TIPO ( Nombre) VALUES
 ('Países'),
 ('Categorías'),
 ('Idiomas'),
@@ -12,7 +12,7 @@ INSERT INTO CATALOGO_TIPO ( nombre) VALUES
 ('Materias'),
 ('Especialidades');
 
-INSERT INTO CATALOGO (nombre, id_tipo, id_padre) VALUES
+INSERT INTO CATALOGO (Nombre, Id_tipo, Id_padre) VALUES
 ( 'Ecuador',1,1),
 ( 'Estados Unidos', 1,1),
 ( 'Programación', 2,1),
@@ -35,7 +35,7 @@ INSERT INTO CATALOGO (nombre, id_tipo, id_padre) VALUES
 ('Supervisor', 5, 1);
 
 
-INSERT INTO Persona (nombre, apellido, correo, descripcion, clave, id_catalogo_pais, fecha_nacimiento) VALUES
+INSERT INTO Persona (Nombre, Apellido, Correo, Descripcion, Clave, Id_catalogo_pais, Fecha_nacimiento) VALUES
 ('Juan', 'Pérez', 'juan.perez@example.com', 'Tutor de programación', 'clave123', 1, '1990-05-15'),
 ('Ana', 'Gómez', 'ana.gomez@example.com', 'Estudiante apasionada por bases de datos', 'clave456', 2, '2000-08-20'),
 ('Carlos', 'Martínez', 'carlos.martinez@example.com', 'Experto en idiomas', 'clave789', 1, '1985-03-10'),
@@ -57,7 +57,7 @@ INSERT INTO Persona (nombre, apellido, correo, descripcion, clave, id_catalogo_p
 ('Ricardo', 'Jiménez', 'ricardo.jimenez@example.com', 'Investigador en inteligencia artificial', 'clave616', 1, '1984-08-17'),
 ('Carmen', 'López', 'carmen.lopez@example.com', 'Estudiante de proyectos académicos', 'clave717', 2, '1995-12-05');
 
-INSERT INTO Curso (id_tutor,nombre, descripcion, id_catalogo_categoria, id_catalogo_subcategoria, id_catalogo_idioma, id_catalogo_nivel, fecha_inicio, fecha_fin, Nota_aprobacion, Duracion) VALUES
+INSERT INTO Curso (Id_tutor,Nombre, Descripcion, Id_catalogo_categoria, Id_catalogo_subcategoria, Id_catalogo_idioma, Id_catalogo_nivel, Fecha_inicio, Fecha_fin, Nota_aprobacion, Duracion) VALUES
 (1, 'Curso Básico de Programación', 'Curso introductorio para principiantes.', 3, 4, 5, 7, '2025-02-01', '2025-03-01', 70, 30),
 (1, 'Bases de Datos Relacionales', 'Curso intermedio sobre bases de datos.', 3, 4, 5, 8, '2025-03-05', '2025-04-05', 75, 40),
 (1, 'Curso de Inglés Básico', 'Aprendizaje del idioma inglés desde cero.', 6, 6, 6, 7, '2025-02-15', '2025-03-15', 65, 25),
@@ -79,7 +79,7 @@ INSERT INTO Curso (id_tutor,nombre, descripcion, id_catalogo_categoria, id_catal
 (10, 'Cursos Prácticos de Diseño', 'Creación de proyectos de diseño gráfico.', 3, 4, 5, 9, '2025-06-10', '2025-07-10', 80, 25),
 (1, 'Gestión de Equipos', 'Formación en manejo y liderazgo de equipos.', 3, 4, 5, 9, '2025-05-25', '2025-06-25', 75, 30);
 
-INSERT INTO Modulo (id_curso,nombre, descripcion) VALUES
+INSERT INTO Modulo (Id_curso,Nombre, Descripcion) VALUES
 (2,'Introducción', 'Fundamentos básicos del curso.'),
 (2,'SQL Básico', 'Primeros pasos con bases de datos relacionales.'),
 (2,'Gramática Básica', 'Gramática para principiantes en inglés.'),
@@ -101,7 +101,7 @@ INSERT INTO Modulo (id_curso,nombre, descripcion) VALUES
 (7, 'SEO y SEM', 'Optimización de motores de búsqueda.'),
 (8, 'Redes Neuronales', 'Introducción a redes neuronales.');
 
-INSERT INTO Actividad_tipo (nombre, descripcion) VALUES
+INSERT INTO Actividad_tipo (Nombre, Descripcion) VALUES
 ('Tarea', 'Actividad evaluada mediante tareas individuales.'),
 ('Examen', 'Evaluación escrita o práctica.'),
 ('Proyecto', 'Entrega de proyectos finales.'),
@@ -123,7 +123,7 @@ INSERT INTO Actividad_tipo (nombre, descripcion) VALUES
 ('Evaluación Oral', 'Presentación evaluada verbalmente.'),
 ('Planificación de Estrategias', 'Creación de estrategias de trabajo.');
 
-INSERT INTO Modulo_actividad (id_actividad, id_modulo, descripcion, fecha_inicio, fecha_fin, Nota_max, Ponderacion) VALUES
+INSERT INTO Modulo_actividad (Id_actividad, Id_modulo, Descripcion, Fecha_inicio, Fecha_fin, Nota_max, Ponderacion) VALUES
 (2,1, 'Tarea inicial del curso.', '2025-02-05', '2025-02-10', 100, 10),
 (2,2, 'Primer examen práctico.', '2025-02-15', '2025-02-20', 100, 20),
 (2,3, 'Proyecto grupal.', '2025-03-01', '2025-03-10', 100, 30),
@@ -145,7 +145,7 @@ INSERT INTO Modulo_actividad (id_actividad, id_modulo, descripcion, fecha_inicio
 (4, 1, 'Análisis de datos inicial.', '2025-06-05', '2025-06-10', 100, 20),
 (4, 2, 'Planificación estratégica.', '2025-06-15', '2025-06-20', 100, 30);
 
-INSERT INTO Estudiante_curso (id_estudiante,id_curso, id_catalogo_curso) VALUES
+INSERT INTO Estudiante_curso (Id_estudiante,Id_curso, Id_catalogo_curso) VALUES
 (1, 1, 3),
 (2, 2, 4),
 (3, 3, 5),
@@ -167,7 +167,7 @@ INSERT INTO Estudiante_curso (id_estudiante,id_curso, id_catalogo_curso) VALUES
 (10, 1, 5),
 (1, 2, 6);
 
-INSERT INTO Nota (id_modulo_actividad,id_estudiante_curso, Nota) VALUES
+INSERT INTO Nota (Id_modulo_actividad,Id_estudiante_curso, Nota) VALUES
 ( 1,1, 85),
 ( 1,2, 90),
 ( 2,3, 95),
