@@ -21,18 +21,15 @@ public class PersonaDTO {
     
     public PersonaDTO(){}
     
-    public PersonaDTO(Integer id_persona, Integer id_rol, Integer id_sexo, String cedula, String nombre,
-    String apellido, String correo, String descripcion, String clave, String fecha_nacimiento) {
-        this.Id_persona = id_persona;
+    public PersonaDTO(Integer id_rol, Integer id_sexo, String cedula, String nombre,
+    String apellido, String correo, String clave) {
         this.Id_rol = id_rol;
         this.Id_sexo = id_sexo;
         this.Cedula = cedula;
         this.Nombre = nombre;
         this.Apellido = apellido;
         this.Correo = correo;
-        this.Descripcion = descripcion;
         this.Clave = clave;
-        this.Fecha_nacimiento = fecha_nacimiento;
     }
     
     
@@ -70,7 +67,7 @@ public class PersonaDTO {
     public void setId_sexo(Integer id_sexo) {
         this.Id_sexo = id_sexo;
     } 
-    
+
     public String getCedula() {
         return Cedula;
     }

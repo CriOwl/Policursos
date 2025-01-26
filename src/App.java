@@ -4,11 +4,11 @@ import DataAccess.DTO.*;
 public class App {
     public static void main(String[] args) throws Exception {
         try {
-            CatalogoTipoDAO cDao = new  CatalogoTipoDAO();
+            RolDAO cDao = new  RolDAO();
 
-            cDao.update(new CatalogoTipoDTO(1, "Soda", "", "", null));
+            cDao.update(new RolDTO(6, "ah", "", "", null));
             
-            for (CatalogoTipoDTO s : cDao.readAll()) {
+            for (RolDTO s : cDao.readAll()) {
                 System.out.println(s.toString());
             }
         } catch (Exception e) {

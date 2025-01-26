@@ -34,6 +34,18 @@ INSERT INTO CATALOGO (Nombre, Id_tipo, Id_padre) VALUES
 ('Gerente', 5, 1),
 ('Supervisor', 5, 1);
 
+INSERT INTO Rol (Nombre) VALUES
+('Administrador'),
+('Estudiante'),
+('Tutor'),
+('Docente'),
+('Investigador');
+
+-- Inserción en Sexo
+INSERT INTO Sexo (Nombre) VALUES
+('Masculino'),
+('Femenino'),
+('Otro');
 
 INSERT INTO Persona (Id_rol, Id_sexo, Cedula, Nombre, Apellido, Correo, Descripcion, Clave, Id_catalogo_pais, Fecha_nacimiento) VALUES
 (2, 1, '1723456789', 'Juan', 'Pérez', 'juan.perez@example.com', 'Tutor de programación', 'clave123', 1, '1990-05-15'),
