@@ -11,28 +11,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DataAccess.SQLiteDataHelper;
-import DataAccess.DTO.CatalogoTipoDTO;
+import DataAccess.DTO.FacturaDTO;
 //import Framework.PatException;
 
-public class CatalogoTipoDAO extends SQLiteDataHelper implements IDAO<CatalogoTipoDTO>{
+public class FacturaDAO extends SQLiteDataHelper implements IDAO<FacturaDTO>{
     @Override
-    public CatalogoTipoDTO readBy(Integer id) throws Exception {
-        CatalogoTipoDTO oS = new CatalogoTipoDTO();
-        String query =" SELECT Id_tipo  " 
-                     +" ,Nombre        " 
+    public FacturaDTO readBy(Integer id) throws Exception {
+        FacturaDTO oS = new FacturaDTO();
+        String query =" SELECT Id_factura  " 
+                     +" ,Id_persona        " 
+                     +" ,Monto_total        " 
+                     +" ,Id_metodo_pago        "
+
                      +" ,Estado        " 
                      +" ,Fecha_creacion     " 
                      +" ,Fecha_modificacion "
-                     +" FROM    CATALOGO_TIPO   "
-                     +" WHERE   Estado ='A' AND Id_tipo =   "+ id.toString() ;
+                     +" FROM    Factura   "
+                     +" WHERE   Estado ='A' AND Id_factura =   "+ id.toString() ;
         try {
             Connection conn = openConnection();         // conectar a DB     
             Statement  stmt = conn.createStatement();   // CRUD : select * ...    
             ResultSet rs   = stmt.executeQuery(query);  // ejecutar la
             while (rs.next()) {
-                oS = new CatalogoTipoDTO(rs.getInt(1)       // Id_tipo
-                                ,rs.getString(2)        // Nombre             
-                                ,rs.getString(3)        // Estado         
+                oS = new FacturaDTO(rs.getInt(1)        // Id_factura
+                                ,rs.getInt(2)           // Id_persona              
+                                ,rs.getDouble(3)        // Monto_total         
+                                ,rs.getInt(4)           // Id_metodo_pago         
+                                ,rs.getString(3)        // Estado        
                                 ,rs.getString(4)        // Fecha_creacion      
                                 ,rs.getString(5));      // Fecha_modificacion
             }
@@ -44,14 +49,17 @@ public class CatalogoTipoDAO extends SQLiteDataHelper implements IDAO<CatalogoTi
     }
 
     @Override
-    public List<CatalogoTipoDTO> readAll() throws Exception {
-        List <CatalogoTipoDTO> lst = new ArrayList<>();
-        String query =" SELECT Id_tipo  " 
-                     +" ,Nombre        " 
+    public List<FacturaDTO> readAll() throws Exception {
+        List <FacturaDTO> lst = new ArrayList<>();
+        String query =" SELECT Id_factura  " 
+                     +" ,Id_persona        " 
+                     +" ,Monto_total        " 
+                     +" ,Id_metodo_pago        "
+
                      +" ,Estado        " 
                      +" ,Fecha_creacion     " 
                      +" ,Fecha_modificacion "
-                     +" FROM    CATALOGO_TIPO   "
+                     +" FROM    Factura   "
                      +" WHERE   Estado ='A' ";
 
         try {
@@ -59,11 +67,13 @@ public class CatalogoTipoDAO extends SQLiteDataHelper implements IDAO<CatalogoTi
             Statement  stmt = conn.createStatement();   // CRUD : select * ...    
             ResultSet rs   = stmt.executeQuery(query);    // ejecutar la
             while (rs.next()) {
-                CatalogoTipoDTO s = new CatalogoTipoDTO( rs.getInt(1)     // Id_tipo
-                                        ,rs.getString(2)  // Nombre             
-                                        ,rs.getString(3)  // Estado         
-                                        ,rs.getString(4)  // Fecha_creacion      
-                                        ,rs.getString(5));// Fecha_modificacion
+                FacturaDTO s = new FacturaDTO( rs.getInt(1)     // Id_factura
+                                              ,rs.getInt(2)           // Id_persona              
+                                              ,rs.getDouble(3)        // Monto_total         
+                                              ,rs.getInt(4)           // Id_metodo_pago         
+                                              ,rs.getString(3)        // Estado        
+                                              ,rs.getString(4)        // Fecha_creacion      
+                                              ,rs.getString(5));      // Fecha_modificacion
                 lst.add(s);
             }
         } 
@@ -74,31 +84,32 @@ public class CatalogoTipoDAO extends SQLiteDataHelper implements IDAO<CatalogoTi
     }
 
     @Override
-    public boolean create(CatalogoTipoDTO entity) throws Exception {
-        String query = " INSERT INTO CATALOGO_TIPO (Nombre) VALUES (?)";
+    public boolean create(FacturaDTO entity) throws Exception {
+        String query = "INSERT INTO Factura (Id_persona, Monto_total, Id_metodo_pago) VALUES (?, ?, ?)";
         try {
-            Connection        conn  = openConnection();
+            Connection conn = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, entity.getNombre());
+            pstmt.setInt(1, entity.getId_persona());       // Id_persona
+            pstmt.setDouble(2, entity.getMonto_total());  // Monto_total
+            pstmt.setInt(3, entity.getId_metodo_pago());  // Id_metodo_pago
             pstmt.executeUpdate();
             return true;
-        } 
-        catch (SQLException e) {
-            throw e;// new PatException(e.getMessage(), getClass().getName(), "create()");
+        } catch (SQLException e) {
+            throw e; // Puedes manejar esta excepción de manera personalizada si lo necesitas.
         }
     }
 
     @Override
-    public boolean update(CatalogoTipoDTO entity) throws Exception {
+    public boolean update(FacturaDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
         LocalDateTime now = LocalDateTime.now();
-        String query = " UPDATE CATALOGO_TIPO SET Nombre = ?, Fecha_modificacion = ? WHERE Id_tipo = ?";
+        String query = " UPDATE Factura SET Monto_total = ?, Fecha_modificacion = ? WHERE Id_factura = ?";
         try {
             Connection          conn = openConnection();
             PreparedStatement pstmt  = conn.prepareStatement(query);
-            pstmt.setString(1, entity.getNombre());
+            pstmt.setDouble(1, entity.getMonto_total());
             pstmt.setString(2, dtf.format(now).toString());
-            pstmt.setInt(3, entity.getId_tipo());
+            pstmt.setInt(3, entity.getId_factura());
             pstmt.executeUpdate();
             return true;
         } 
@@ -109,7 +120,7 @@ public class CatalogoTipoDAO extends SQLiteDataHelper implements IDAO<CatalogoTi
 
     @Override
     public boolean delete(Integer id) throws Exception {
-        String query = " UPDATE CATALOGO_TIPO SET Estado = ? WHERE Id_tipo = ?";
+        String query = " UPDATE Factura SET Estado = ? WHERE Id_factura = ?";
         try {
             Connection          conn = openConnection();
             PreparedStatement  pstmt = conn.prepareStatement(query);
@@ -124,7 +135,7 @@ public class CatalogoTipoDAO extends SQLiteDataHelper implements IDAO<CatalogoTi
     }
 
     public Integer getMaxRow()  throws Exception  {
-        String query =" SELECT COUNT(*) TotalReg FROM CATALOGO_TIPO "
+        String query =" SELECT COUNT(*) TotalReg FROM Factura "
                      +" WHERE   Estado ='A' ";
         try {
             Connection conn = openConnection();         // conectar a DB     

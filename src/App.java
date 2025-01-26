@@ -4,11 +4,11 @@ import DataAccess.DTO.*;
 public class App {
     public static void main(String[] args) throws Exception {
         try {
-            SexoDAO cDao = new  SexoDAO();
+            FacturaDAO cDao = new  FacturaDAO();
 
-            cDao.update(new SexoDTO(4, "compañere", "", "", ""));
+            cDao.create(new FacturaDTO(2, 145.99, 1));
             
-            for (SexoDTO s : cDao.readAll()) {
+            for (FacturaDTO s : cDao.readAll()) {
                 System.out.println(s.toString());
             }
         } catch (Exception e) {

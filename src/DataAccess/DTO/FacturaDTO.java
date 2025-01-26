@@ -1,6 +1,5 @@
 package DataAccess.DTO;
 
-import java.math.Double;
 
 public class FacturaDTO {
     private Integer Id_factura;
