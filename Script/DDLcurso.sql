@@ -9,7 +9,6 @@ DROP TABLE IF EXISTS Persona;
 DROP TABLE IF EXISTS CATALOGO;
 DROP TABLE IF EXISTS CATALOGO_TIPO;
 
--- incluí tablas
 
 DROP TABLE IF EXISTS Rol;
 DROP TABLE IF EXISTS Sexo;
@@ -34,6 +33,7 @@ CREATE TABLE Sexo (
 
 CREATE TABLE Factura (
      Id_factura INTEGER PRIMARY KEY AUTOINCREMENT
+    ,Id_curso INTEGER  NOT NULL REFERENCES Curso(Id_curso)
     ,Id_persona INTEGER NOT NULL REFERENCES Persona(Id_persona)
     ,Monto_total DECIMAL(10, 2)
     ,Id_metodo_pago INTEGER NOT NULL REFERENCES MetodoPago(Id_metodo_pago)
@@ -51,7 +51,6 @@ CREATE TABLE MetodoPago (
 );
 
 
--- fin inclusión
 
 
 CREATE TABLE CATALOGO_TIPO(
@@ -71,7 +70,6 @@ CREATE TABLE CATALOGO(
     ,Id_padre INTEGER  REFERENCES CATALOGO(Id_catalogo)
 );
 
---incluí campos
 
 CREATE TABLE Persona(
      Id_persona INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
@@ -90,15 +88,11 @@ CREATE TABLE Persona(
     ,Fecha_modificacion DATETIME
 );
 
---fin inclusión campos
 
-
---incluí Id_factura
 
 CREATE TABLE Curso(
      Id_curso INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
     ,Id_tutor INTEGER NOT NULL REFERENCES Persona(Id_persona)
-    ,Id_factura INTEGER NOT NULL REFERENCES Factura(Id_factura)
     ,Nombre TEXT NOT NULL
     ,Descripcion TEXT
     ,Id_catalogo_categoria INTEGER NOT NULL REFERENCES CATALOGO(Id_catalogo)
@@ -114,7 +108,6 @@ CREATE TABLE Curso(
     ,Fecha_modificacion DATETIME
 );
 
---fin inclusión
 
 CREATE TABLE Modulo(
      Id_modulo INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
@@ -161,3 +154,4 @@ CREATE TABLE Nota (
     ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
     ,Fecha_modificacion DATETIME
 );
+
