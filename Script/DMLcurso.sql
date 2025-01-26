@@ -47,6 +47,12 @@ INSERT INTO Sexo (Nombre) VALUES
 ('Femenino'),
 ('Otro');
 
+INSERT INTO MetodoPago (Nombre) VALUES
+('Tarjeta de Crédito'),
+('PayPal'),
+('Transferencia Bancaria'),
+('Efectivo');
+
 INSERT INTO Persona (Id_rol, Id_sexo, Cedula, Nombre, Apellido, Correo, Descripcion, Clave, Id_catalogo_pais, Fecha_nacimiento) VALUES
 (2, 1, '1723456789', 'Juan', 'Pérez', 'juan.perez@example.com', 'Tutor de programación', 'clave123', 1, '1990-05-15'),
 (2, 2, '1712345678', 'Ana', 'Gómez', 'ana.gomez@example.com', 'Estudiante apasionada por bases de datos', 'clave456', 2, '2000-08-20'),
@@ -90,6 +96,29 @@ INSERT INTO Curso (Id_tutor,Nombre, Descripcion, Id_catalogo_categoria, Id_catal
 (9, 'Desarrollo de Software', 'Principios y prácticas en desarrollo.', 3, 4, 5, 8, '2025-05-20', '2025-06-20', 75, 40),
 (10, 'Cursos Prácticos de Diseño', 'Creación de proyectos de diseño gráfico.', 3, 4, 5, 9, '2025-06-10', '2025-07-10', 80, 25),
 (1, 'Gestión de Equipos', 'Formación en manejo y liderazgo de equipos.', 3, 4, 5, 9, '2025-05-25', '2025-06-25', 75, 30);
+
+INSERT INTO Factura (Id_factura,Id_curso, Id_persona, Monto_total, Id_metodo_pago) VALUES
+(1, 1, 1, 1000.00, 1),
+(2, 2, 2, 1200.00, 2),
+(3, 3, 3, 1500.00, 3),
+(4, 4, 4, 1800.00, 4),
+(5, 5, 5, 2000.00, 1),
+(6, 6, 6, 2200.00, 2),
+(7, 7, 7, 2500.00, 3),
+(8, 8, 8, 2800.00, 4),
+(9, 9, 9, 3000.00, 1),
+(10, 10, 10, 3200.00, 2),
+(11, 11, 11, 3500.00, 3),
+(12, 12, 12, 3800.00, 4),
+(13, 13, 13, 4100.00, 1),
+(14, 14, 14, 4400.00, 2),
+(15, 15, 15, 4700.00, 3),
+(16, 16, 16, 5000.00, 4),
+(17, 17, 17, 5300.00, 1),
+(18, 18, 18, 5600.00, 2),
+(19, 19, 19, 5900.00, 3),
+(20, 20, 20, 6200.00, 4);
+
 
 INSERT INTO Modulo (Id_curso,Nombre, Descripcion) VALUES
 (2,'Introducción', 'Fundamentos básicos del curso.'),
