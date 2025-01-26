@@ -3,6 +3,7 @@ package DataAccess.DTO;
 public class CursoDTO {
     private Integer id_curso;
     private Integer id_tutor;
+    private Integer id_factura;
     private Integer id_catalogo_categoria;
     private Integer id_catalogo_subcategoria;
     private Integer id_catalogo_idioma;
@@ -16,31 +17,19 @@ public class CursoDTO {
     private String estado;
     private String fecha_creacion;
     private String fecha_modificacion;
-
+    
     public CursoDTO(){}
     
-    public CursoDTO(Integer id_curso, Integer id_tutor, Integer id_catalogo_categoria, Integer id_catalogo_subcategoria,
-            Integer id_catalogo_idioma, Integer id_catalogo_nive, String nombre, String descripcion,
-            String fecha_inicio, String echa_fin, String nota_aprobacion, String duracion, String estado,
-            String fecha_creacion, String fecha_modificacion) {
-        this.id_curso = id_curso;
-        this.id_tutor = id_tutor;
-        this.id_catalogo_categoria = id_catalogo_categoria;
-        this.id_catalogo_subcategoria = id_catalogo_subcategoria;
-        this.id_catalogo_idioma = id_catalogo_idioma;
-        this.id_catalogo_nivel = id_catalogo_nive;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.fecha_inicio = fecha_inicio;
-        this.fecha_fin = echa_fin;
-        Nota_aprobacion = nota_aprobacion;
-        Duracion = duracion;
-        this.estado = estado;
-        this.fecha_creacion = fecha_creacion;
-        this.fecha_modificacion = fecha_modificacion;
+    
+    
+    
+    public Integer getId_factura() {
+        return id_factura;
     }
 
-
+    public void setId_factura(Integer id_factura) {
+        this.id_factura = id_factura;
+    }
     public Integer getId_curso() {
         return id_curso;
     }
@@ -136,6 +125,7 @@ public class CursoDTO {
         return getClass().getName()
         + "\n Id_curso:  " + getId_curso()
         + "\n Id_tutor:  " + getId_tutor()
+        + "\n Id_factura:  " + getId_factura()
         + "\n Id_catalogo_categoria:  " + getId_catalogo_categoria()
         + "\n Id_catalogo_subcategoria:  " + getId_catalogo_subcategoria()
         + "\n Id_catalogo_idioma:  " + getId_catalogo_idioma()
