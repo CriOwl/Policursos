@@ -109,4 +109,20 @@ public class PersonaDTO {
     public void setFecha_modificacion(String fecha_modificacion) {
         this.fecha_modificacion = fecha_modificacion;
     } 
+
+    @Override
+    public String toString() {
+        return getClass().getName()
+        + "\n Id_Tipo:  " + getId_persona()
+        + "\n Nombre: " + getNombre()
+        + "\n Apellido: " + getApellido()
+        + "\n Correo: " + getCorreo()
+        + "\n Descripcion: " + getDescripcion()
+        + "\n Clave: " + getClave()
+        + "\n IdCatalogoPais: " + getId_catalogo_pais()
+        + "\n FechaNacimiento: " + getFecha_nacimiento()
+        + "\n Estado: " + getNombre()
+        + "\n FechaCreacion:  " +  getFecha_creacion()
+        + "\n Fecha_modificacion=" + getFecha_modificacion();
+    }
 }
