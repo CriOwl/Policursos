@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS Factura;
 DROP TABLE IF EXISTS MetodoPago;
 
 CREATE TABLE Rol (
-    Id_rol INTEGER PRIMARY KEY AUTOINCREMENT
+     Id_rol INTEGER PRIMARY KEY AUTOINCREMENT
     ,Nombre VARCHAR(20) NOT NULL UNIQUE
     ,Estado VARCHAR(1) DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I')) 
     ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
@@ -25,7 +25,7 @@ CREATE TABLE Rol (
 );
 
 CREATE TABLE Sexo (
-    Id_sexo INTEGER PRIMARY KEY AUTOINCREMENT
+     Id_sexo INTEGER PRIMARY KEY AUTOINCREMENT
     ,Nombre VARCHAR(20) NOT NULL UNIQUE
     ,Estado VARCHAR(1) DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I')) 
     ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
@@ -43,7 +43,7 @@ CREATE TABLE Factura (
 );
 
 CREATE TABLE MetodoPago (
-    Id_metodo_pago INTEGER PRIMARY KEY AUTOINCREMENT
+     Id_metodo_pago INTEGER PRIMARY KEY AUTOINCREMENT
     ,Nombre VARCHAR(20) NOT NULL UNIQUE
     ,Estado VARCHAR(1) DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I')) 
     ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
@@ -55,14 +55,14 @@ CREATE TABLE MetodoPago (
 
 
 CREATE TABLE CATALOGO_TIPO(
-    Id_tipo INTEGER NOT NULL PRIMARY KEY
+     Id_tipo INTEGER NOT NULL PRIMARY KEY
     ,Nombre VARCHAR(20) NOT NULL
     ,Estado VARCHAR(1) DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I')) 
     ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
     ,Fecha_modificacion DATETIME
 );
 CREATE TABLE CATALOGO(
-    Id_catalogo INTEGER NOT NULL PRIMARY KEY
+     Id_catalogo INTEGER NOT NULL PRIMARY KEY
     ,Nombre VARCHAR(20) NOT NULL
     ,Estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
     ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
@@ -74,7 +74,7 @@ CREATE TABLE CATALOGO(
 --incluí campos
 
 CREATE TABLE Persona(
-    Id_persona INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
+     Id_persona INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
     ,Id_rol INTEGER NOT NULL REFERENCES Rol(Id_rol)
     ,Id_sexo INTEGER NOT NULL REFERENCES Sexo(Id_sexo)
     ,Cedula VARCHAR(10) NOT NULL UNIQUE
@@ -96,7 +96,7 @@ CREATE TABLE Persona(
 --incluí Id_factura
 
 CREATE TABLE Curso(
-    Id_curso INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
+     Id_curso INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
     ,Id_tutor INTEGER NOT NULL REFERENCES Persona(Id_persona)
     ,Id_factura INTEGER NOT NULL REFERENCES Factura(Id_factura)
     ,Nombre TEXT NOT NULL
@@ -117,7 +117,7 @@ CREATE TABLE Curso(
 --fin inclusión
 
 CREATE TABLE Modulo(
-    Id_modulo INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
+     Id_modulo INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
     ,Id_curso INTEGER NOT NULL REFERENCES Curso(Id_curso)
     ,Nombre VARCHAR(25) NOT NULL
     ,Descripcion TEXT
