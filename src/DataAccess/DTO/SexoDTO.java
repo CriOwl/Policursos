@@ -1,57 +1,67 @@
 package DataAccess.DTO;
 
 public class SexoDTO {
-    private Integer id_sexo;
-    private String nombre;
-    private String estado; 
-    private String fecha_creacion;
-    private String fecha_modificacion;
+    private Integer Id_sexo;
+    private String Nombre;
+    private String Estado; 
+    private String Fecha_creacion;
+    private String Fecha_modificacion;
 
+    
     public SexoDTO(){}
     
-    public SexoDTO(Integer id_sexo, String nombre) {
-        this.id_sexo = id_sexo;
-        this.nombre = nombre;
+    public SexoDTO(String nombre) {
+        Nombre = nombre;
     }
 
     public SexoDTO(Integer id_sexo, String nombre, String estado, String fecha_creacion, String fecha_modificacion) {
-        this.id_sexo = id_sexo;
-        this.nombre = nombre;
-        this.estado = estado;
-        this.fecha_creacion = fecha_creacion;
-        this.fecha_modificacion = fecha_modificacion;
+        Id_sexo = id_sexo;
+        Nombre = nombre;
+        Estado = estado;
+        Fecha_creacion = fecha_creacion;
+        Fecha_modificacion = fecha_modificacion;
     }
+    
     public Integer getId_sexo() {
-        return id_sexo;
-    }
-    public void setId_sexo(Integer id_sexo) {
-        this.id_sexo = id_sexo;
-    }
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    public String getEstado() {
-        return estado;
-    }
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-    public String getFecha_creacion() {
-        return fecha_creacion;
-    }
-    public void setFecha_creacion(String fecha_creacion) {
-        this.fecha_creacion = fecha_creacion;
-    }
-    public String getFecha_modificacion() {
-        return fecha_modificacion;
-    }
-    public void setFecha_modificacion(String fecha_modificacion) {
-        this.fecha_modificacion = fecha_modificacion;
+        return Id_sexo;
     }
 
+    public void setId_sexo(Integer id_sexo) {
+        Id_sexo = id_sexo;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String nombre) {
+        Nombre = nombre;
+    }
+
+    public String getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(String estado) {
+        Estado = estado;
+    }
+
+    public String getFecha_creacion() {
+        return Fecha_creacion;
+    }
+
+    public void setFecha_creacion(String fecha_creacion) {
+        Fecha_creacion = fecha_creacion;
+    }
+
+    public String getFecha_modificacion() {
+        return Fecha_modificacion;
+    }
+
+    public void setFecha_modificacion(String fecha_modificacion) {
+        Fecha_modificacion = fecha_modificacion;
+    }
+    
     public String toString() {
         return getClass().getName()
         + "\n Id_sexo:  " + getId_sexo()

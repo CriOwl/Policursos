@@ -11,26 +11,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DataAccess.SQLiteDataHelper;
-import DataAccess.DTO.CatalogoTipoDTO;
+import DataAccess.DTO.SexoDTO;
 //import Framework.PatException;
 
-public class CatalogoTipoDAO extends SQLiteDataHelper implements IDAO<CatalogoTipoDTO>{
+public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO>{
     @Override
-    public CatalogoTipoDTO readBy(Integer id) throws Exception {
-        CatalogoTipoDTO oS = new CatalogoTipoDTO();
-        String query =" SELECT Id_tipo  " 
+    public SexoDTO readBy(Integer id) throws Exception {
+        SexoDTO oS = new SexoDTO();
+        String query =" SELECT Id_sexo  " 
                      +" ,Nombre        " 
                      +" ,Estado        " 
                      +" ,Fecha_creacion     " 
                      +" ,Fecha_modificacion "
-                     +" FROM    CATALOGO_TIPO   "
-                     +" WHERE   Estado ='A' AND Id_tipo =   "+ id.toString() ;
+                     +" FROM    Sexo   "
+                     +" WHERE   Estado ='A' AND Id_sexo =   "+ id.toString() ;
         try {
             Connection conn = openConnection();         // conectar a DB     
             Statement  stmt = conn.createStatement();   // CRUD : select * ...    
             ResultSet rs   = stmt.executeQuery(query);  // ejecutar la
             while (rs.next()) {
-                oS = new CatalogoTipoDTO(rs.getInt(1)       // Id_tipo
+                oS = new SexoDTO(rs.getInt(1)       // Id_sexo
                                 ,rs.getString(2)        // Nombre             
                                 ,rs.getString(3)        // Estado         
                                 ,rs.getString(4)        // Fecha_creacion      
@@ -44,14 +44,14 @@ public class CatalogoTipoDAO extends SQLiteDataHelper implements IDAO<CatalogoTi
     }
 
     @Override
-    public List<CatalogoTipoDTO> readAll() throws Exception {
-        List <CatalogoTipoDTO> lst = new ArrayList<>();
-        String query =" SELECT Id_tipo  " 
+    public List<SexoDTO> readAll() throws Exception {
+        List <SexoDTO> lst = new ArrayList<>();
+        String query =" SELECT Id_sexo  " 
                      +" ,Nombre        " 
                      +" ,Estado        " 
                      +" ,Fecha_creacion     " 
                      +" ,Fecha_modificacion "
-                     +" FROM    CATALOGO_TIPO   "
+                     +" FROM    Sexo   "
                      +" WHERE   Estado ='A' ";
 
         try {
@@ -59,7 +59,7 @@ public class CatalogoTipoDAO extends SQLiteDataHelper implements IDAO<CatalogoTi
             Statement  stmt = conn.createStatement();   // CRUD : select * ...    
             ResultSet rs   = stmt.executeQuery(query);    // ejecutar la
             while (rs.next()) {
-                CatalogoTipoDTO s = new CatalogoTipoDTO( rs.getInt(1)     // Id_tipo
+                SexoDTO s = new SexoDTO( rs.getInt(1)     // Id_sexo
                                         ,rs.getString(2)  // Nombre             
                                         ,rs.getString(3)  // Estado         
                                         ,rs.getString(4)  // Fecha_creacion      
@@ -74,8 +74,8 @@ public class CatalogoTipoDAO extends SQLiteDataHelper implements IDAO<CatalogoTi
     }
 
     @Override
-    public boolean create(CatalogoTipoDTO entity) throws Exception {
-        String query = " INSERT INTO CATALOGO_TIPO (Nombre) VALUES (?)";
+    public boolean create(SexoDTO entity) throws Exception {
+        String query = " INSERT INTO Sexo (Nombre) VALUES (?)";
         try {
             Connection        conn  = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -89,16 +89,16 @@ public class CatalogoTipoDAO extends SQLiteDataHelper implements IDAO<CatalogoTi
     }
 
     @Override
-    public boolean update(CatalogoTipoDTO entity) throws Exception {
+    public boolean update(SexoDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
         LocalDateTime now = LocalDateTime.now();
-        String query = " UPDATE CATALOGO_TIPO SET Nombre = ?, Fecha_modificacion = ? WHERE Id_tipo = ?";
+        String query = " UPDATE Sexo SET Nombre = ?, Fecha_modificacion = ? WHERE Id_sexo = ?";
         try {
             Connection          conn = openConnection();
             PreparedStatement pstmt  = conn.prepareStatement(query);
             pstmt.setString(1, entity.getNombre());
             pstmt.setString(2, dtf.format(now).toString());
-            pstmt.setInt(3, entity.getId_tipo());
+            pstmt.setInt(3, entity.getId_sexo());
             pstmt.executeUpdate();
             return true;
         } 
@@ -109,7 +109,7 @@ public class CatalogoTipoDAO extends SQLiteDataHelper implements IDAO<CatalogoTi
 
     @Override
     public boolean delete(Integer id) throws Exception {
-        String query = " UPDATE CATALOGO_TIPO SET Estado = ? WHERE Id_tipo = ?";
+        String query = " UPDATE Sexo SET Estado = ? WHERE Id_sexo = ?";
         try {
             Connection          conn = openConnection();
             PreparedStatement  pstmt = conn.prepareStatement(query);
@@ -124,7 +124,7 @@ public class CatalogoTipoDAO extends SQLiteDataHelper implements IDAO<CatalogoTi
     }
 
     public Integer getMaxRow()  throws Exception  {
-        String query =" SELECT COUNT(*) TotalReg FROM CATALOGO_TIPO "
+        String query =" SELECT COUNT(*) TotalReg FROM Sexo "
                      +" WHERE   Estado ='A' ";
         try {
             Connection conn = openConnection();         // conectar a DB     
