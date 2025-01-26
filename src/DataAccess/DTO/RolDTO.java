@@ -62,4 +62,5 @@ public class RolDTO {
         + "\n FechaCreacion:  " +  getFecha_creacion()
         + "\n Fecha_modificacion=" + getFecha_modificacion();
     }
+ 
 }
