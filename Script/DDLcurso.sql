@@ -8,95 +8,156 @@ DROP TABLE IF EXISTS Curso;
 DROP TABLE IF EXISTS Persona;
 DROP TABLE IF EXISTS CATALOGO;
 DROP TABLE IF EXISTS CATALOGO_TIPO;
-CREATE TABLE CATALOGO_TIPO(
-    Id_tipo                 INTEGER NOT NULL PRIMARY KEY
-    ,Nombre                 VARCHAR(20) NOT NULL
-    ,Estado                 VARCHAR(1) DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I')) 
-    ,Fecha_creacion         DATETIME DEFAULT (datetime('now','localtime'))
-    ,Fecha_modificacion     DATETIME
-);
-CREATE TABLE CATALOGO(
-    Id_catalogo             INTEGER NOT NULL PRIMARY KEY
-    ,Nombre                 VARCHAR(20) NOT NULL
-    ,Estado                 VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
-    ,Fecha_creacion         DATETIME DEFAULT (datetime('now','localtime'))
-    ,Fecha_modificacion     DATETIME
-    ,Id_tipo                INTEGER NOT NULL REFERENCES CATALOGO_TIPO(Id_tipo)
-    ,Id_padre               INTEGER  REFERENCES CATALOGO(Id_catalogo)
-);
-CREATE TABLE Persona(
-    Id_persona              INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
-    ,Nombre                 VARCHAR(50) NOT NULL
-    ,Apellido               VARCHAR(50) NOT NULL
-    ,Correo                 TEXT NOT NULL
-    ,Descripcion            TEXT
-    ,Clave                  TEXT NOT NULL
-    ,Id_catalogo_pais       INTEGER NOT NULL REFERENCES CATALOGO(Id_catalogo)
-    ,Fecha_nacimiento       DATE NOT NULL
-    ,Estado                 VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
-    ,Fecha_creacion         DATETIME DEFAULT (datetime('now','localtime'))
-    ,Fecha_modificacion     DATETIME
-);
-CREATE TABLE Curso(
-    Id_curso                      INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
-    ,Id_tutor                     INTEGER NOT NULL REFERENCES Persona(Id_persona)
-    ,Nombre                       TEXT NOT NULL
-    ,Descripcion                  TEXT
-    ,Id_catalogo_categoria        INTEGER NOT NULL REFERENCES CATALOGO(Id_catalogo)
-    ,Id_catalogo_subcategoria     INTEGER NOT NULL REFERENCES CATALOGO(Id_catalogo)
-    ,Id_catalogo_idioma           INTEGER NOT NULL REFERENCES CATALOGO(Id_catalogo)
-    ,Id_catalogo_nivel            INTEGER NOT NULL REFERENCES CATALOGO(Id_catalogo)
-    ,Fecha_inicio                 DATETIME NOT NULL
-    ,Fecha_fin                    DATETIME NOT NULL
-    ,Nota_aprobacion              INTEGER NOT NULL
-    ,Duracion                     INTEGER NOT NULL
-    ,Estado                       VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
-    ,Fecha_creacion               DATETIME DEFAULT (datetime('now','localtime'))
-    ,Fecha_modificacion           DATETIME
+
+-- incluí tablas
+
+DROP TABLE IF EXISTS Rol;
+DROP TABLE IF EXISTS Sexo;
+DROP TABLE IF EXISTS Factura;
+DROP TABLE IF EXISTS MetodoPago;
+
+CREATE TABLE Rol (
+    id_rol INTEGER PRIMARY KEY AUTOINCREMENT
+    ,nombre VARCHAR(20) NOT NULL UNIQUE
+    ,estado VARCHAR(1) DEFAULT ('A') CONSTRAINT verficador CHECK(estado IN ('A','I')) 
+    ,fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
+    ,fecha_modificacion DATETIME
 );
 
+CREATE TABLE Sexo (
+    id_sexo INTEGER PRIMARY KEY AUTOINCREMENT
+    ,nombre VARCHAR(20) NOT NULL UNIQUE
+    ,estado VARCHAR(1) DEFAULT ('A') CONSTRAINT verficador CHECK(estado IN ('A','I')) 
+    ,fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
+    ,fecha_modificacion DATETIME
+);
+
+CREATE TABLE Factura (
+     id_factura INTEGER PRIMARY KEY AUTOINCREMENT
+    ,id_persona INTEGER NOT NULL REFERENCES Persona(id_persona)
+    ,monto_total DECIMAL(10, 2)
+    ,id_metodo_pago INTEGER NOT NULL REFERENCES MetodoPago(id_metodo_pago)
+    ,estado VARCHAR(1) DEFAULT ('A') CONSTRAINT verficador CHECK(estado IN ('A','I')) 
+    ,fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
+    ,fecha_modificacion DATETIME
+);
+
+CREATE TABLE MetodoPago (
+    id_metodo_pago INTEGER PRIMARY KEY AUTOINCREMENT
+    ,nombre VARCHAR(20) NOT NULL UNIQUE
+    ,estado VARCHAR(1) DEFAULT ('A') CONSTRAINT verficador CHECK(estado IN ('A','I')) 
+    ,fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
+    ,fecha_modificacion DATETIME
+);
+
+
+-- fin inclusión
+
+
+CREATE TABLE CATALOGO_TIPO(
+    id_tipo INTEGER NOT NULL PRIMARY KEY
+    ,nombre VARCHAR(20) NOT NULL
+    ,estado VARCHAR(1) DEFAULT ('A') CONSTRAINT verficador CHECK(estado IN ('A','I')) 
+    ,fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
+    ,fecha_modificacion DATETIME
+);
+CREATE TABLE CATALOGO(
+    id_catalogo INTEGER NOT NULL PRIMARY KEY
+    ,nombre VARCHAR(20) NOT NULL
+    ,estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(estado IN ('A','I'))
+    ,fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
+    ,fecha_modificacion DATETIME
+    ,id_tipo INTEGER NOT NULL REFERENCES CATALOGO_TIPO(id_tipo)
+    ,id_padre INTEGER  REFERENCES CATALOGO(id_catalogo)
+);
+
+--incluí campos
+
+CREATE TABLE Persona(
+    id_persona INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
+    ,id_rol INTEGER NOT NULL REFERENCES Rol(id_rol)
+    ,id_sexo INTEGER NOT NULL REFERENCES Sexo(id_sexo)
+    ,cedula VARCHAR(10) NOT NULL UNIQUE
+    ,nombre VARCHAR(50) NOT NULL
+    ,apellido VARCHAR(50) NOT NULL
+    ,correo TEXT NOT NULL
+    ,descripcion TEXT
+    ,clave  TEXT NOT NULL
+    ,id_catalogo_pais INTEGER NOT NULL REFERENCES CATALOGO(id_catalogo)
+    ,fecha_nacimiento DATE NOT NULL
+    ,estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(estado IN ('A','I'))
+    ,fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
+    ,fecha_modificacion DATETIME
+);
+
+--fin inclusión campos
+
+
+--incluí id_factura
+
+CREATE TABLE Curso(
+    id_curso INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
+    ,id_tutor INTEGER NOT NULL REFERENCES Persona(id_persona)
+    ,id_factura INTEGER NOT NULL REFERENCES Factura(id_factura)
+    ,nombre TEXT NOT NULL
+    ,descripcion TEXT
+    ,id_catalogo_categoria INTEGER NOT NULL REFERENCES CATALOGO(id_catalogo)
+    ,id_catalogo_subcategoria INTEGER NOT NULL REFERENCES CATALOGO(id_catalogo)
+    ,id_catalogo_idioma INTEGER NOT NULL REFERENCES CATALOGO(id_catalogo)
+    ,id_catalogo_nivel INTEGER NOT NULL REFERENCES CATALOGO(id_catalogo)
+    ,fecha_inicio DATETIME NOT NULL
+    ,fecha_fin DATETIME NOT NULL
+    ,Nota_aprobacion INTEGER NOT NULL
+    ,Duracion INTEGER NOT NULL
+    ,estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(estado IN ('A','I'))
+    ,fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
+    ,fecha_modificacion DATETIME
+);
+
+--fin inclusión
+
 CREATE TABLE Modulo(
-    Id_modulo                   INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
-    ,Id_curso                   INTEGER NOT NULL REFERENCES Curso(Id_curso)
-    ,Nombre                     VARCHAR(25) NOT NULL
-    ,Descripcion                TEXT
-    ,Estado                     VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
-    ,Fecha_creacion             DATETIME DEFAULT (datetime('now','localtime'))
-    ,Fecha_modificacion         DATETIME
+    id_modulo INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
+    ,id_curso INTEGER NOT NULL REFERENCES Curso(id_curso)
+    ,nombre VARCHAR(25) NOT NULL
+    ,descripcion TEXT
+    ,estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(estado IN ('A','I'))
+    ,fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
+    ,fecha_modificacion DATETIME
 );
 CREATE TABLE Actividad_tipo(
-    Id_actividad                INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
-    ,Nombre                     VARCHAR(25) NOT NULL
-    ,descripcion                TEXT
-    ,Estado                     VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
-    ,Fecha_creacion             DATETIME DEFAULT (datetime('now','localtime'))
-    ,Fecha_modificacion         DATETIME
+    id_actividad INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
+    ,nombre VARCHAR(25) NOT NULL
+    ,descripcion TEXT
+    ,estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(estado IN ('A','I'))
+    ,fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
+    ,fecha_modificacion DATETIME
 );
 CREATE TABLE Modulo_actividad(
-    Id_modulo_actividad         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
-    ,Id_actividad               INTEGER NOT NULL REFERENCES Actividad_tipo(Id_actividad)
-    ,Id_modulo                  INTEGER NOT NULL REFERENCES Modulo(Id_modulo)
-    ,Descripcion                TEXT
-    ,Fecha_inicio               DATETIME NOT NULL
-    ,Fecha_fin                  DATETIME NOT NULL
-    ,Nota_max                   INTEGER NOT NULL
-    ,Ponderacion                INTEGER NOT NULL
-    ,Estado                     VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
-    ,Fecha_creacion             DATETIME DEFAULT (datetime('now','localtime'))
-    ,Fecha_modificacion         DATETIME
+    id_modulo_actividad INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
+    ,id_actividad INTEGER NOT NULL REFERENCES Actividad_tipo(id_actividad)
+    ,id_modulo INTEGER NOT NULL REFERENCES Modulo(id_modulo)
+    ,descripcion TEXT
+    ,fecha_inicio DATETIME NOT NULL
+    ,fecha_fin DATETIME NOT NULL
+    ,Nota_max INTEGER NOT NULL
+    ,Ponderacion INTEGER NOT NULL
+    ,estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(estado IN ('A','I'))
+    ,fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
+    ,fecha_modificacion DATETIME
 );
 CREATE TABLE Estudiante_curso(
-    Id_estudiante_curso         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
-    ,Id_estudiante              INTEGER NOT NULL REFERENCES Persona(Id_persona)
-    ,Id_curso                   INTEGER NOT NULL REFERENCES Curso(Id_curso)
-    ,Id_catalogo_curso          INTEGER NOT NULL REFERENCES CATALOGO(Id_catalogo)
+    id_estudiante_curso INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
+    ,id_estudiante INTEGER NOT NULL REFERENCES Persona(id_persona)
+    ,id_curso  INTEGER NOT NULL REFERENCES Curso(id_curso)
+    ,id_catalogo_curso INTEGER NOT NULL REFERENCES CATALOGO(id_catalogo)
 );
 CREATE TABLE Nota (
-    Id_nota                     INTEGER NOT NULL PRIMARY KEY
-    ,Id_modulo_actividad        INTEGER NOT NULL REFERENCES Modulo_actividad(Id_modulo_actividad)
-    ,Id_estudiante_curso        INTEGER NOT NULL REFERENCES Estudiante_curso(Id_estudiante_curso)
-    ,Nota                       INTEGER NOT NULL
-    ,Estado                     VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
-    ,Fecha_creacion             DATETIME DEFAULT (datetime('now','localtime'))
-    ,Fecha_modificacion         DATETIME
+    id_nota INTEGER NOT NULL PRIMARY KEY
+    ,id_modulo_actividad INTEGER NOT NULL REFERENCES Modulo_actividad(id_modulo_actividad)
+    ,id_estudiante_curso INTEGER NOT NULL REFERENCES Estudiante_curso(id_estudiante_curso)
+    ,Nota INTEGER NOT NULL
+    ,estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(estado IN ('A','I'))
+    ,fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
+    ,fecha_modificacion DATETIME
 );
