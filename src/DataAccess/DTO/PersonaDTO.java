@@ -22,13 +22,14 @@ public class PersonaDTO {
     public PersonaDTO(){}
     
     public PersonaDTO(Integer id_rol, Integer id_sexo, String cedula, String nombre,
-    String apellido, String correo, String clave) {
+    String apellido, String correo, String descripcion, String clave) {
         this.Id_rol = id_rol;
         this.Id_sexo = id_sexo;
         this.Cedula = cedula;
         this.Nombre = nombre;
         this.Apellido = apellido;
         this.Correo = correo;
+        this.Descripcion = descripcion;
         this.Clave = clave;
     }
     
@@ -147,14 +148,15 @@ public class PersonaDTO {
     public String toString() {
         return getClass().getName()
         + "\n Id_persona:  " + getId_persona()
-        + "\n IdCatalogoPais: " + getId_catalogo_pais()
         + "\n Id_rol:  " + getId_rol()
         + "\n Id_sexo:  " + getId_sexo()
+        + "\n Cedula:  " + getCedula()
         + "\n Nombre: " + getNombre()
         + "\n Apellido: " + getApellido()
         + "\n Correo: " + getCorreo()
         + "\n Descripcion: " + getDescripcion()
         + "\n Clave: " + getClave()
+        + "\n IdCatalogoPais: " + getId_catalogo_pais()
         + "\n FechaNacimiento: " + getFecha_nacimiento()
         + "\n Estado: " + getNombre()
         + "\n FechaCreacion:  " +  getFecha_creacion()

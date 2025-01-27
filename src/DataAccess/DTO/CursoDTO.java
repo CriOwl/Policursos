@@ -12,7 +12,6 @@ public class CursoDTO {
     private String Fecha_inicio;
     private String Fecha_fin;
     private String Nota_aprobacion;
-    
     private String Duracion;
     private String Estado;
     private String Fecha_creacion;

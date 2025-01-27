@@ -103,8 +103,8 @@ public class FacturaDTO {
         + "\n Id_factura:           " + getId_factura()
         + "\n Id_curso:             " + getId_curso()
         + "\n Id_persona:           " + getId_persona()
-        + "\n Id_metodo_pago:       " + getId_metodo_pago()
         + "\n Monto_total:          " + getMonto_total()
+        + "\n Id_metodo_pago:       " + getId_metodo_pago()
         + "\n Estado:               " + getEstado()
         + "\n FechaCreacion:        " + getFecha_creacion()
         + "\n Fecha_modificacion=   " + getFecha_modificacion();

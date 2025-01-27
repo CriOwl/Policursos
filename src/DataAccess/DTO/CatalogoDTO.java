@@ -12,8 +12,9 @@ public class CatalogoDTO {
     
     public CatalogoDTO(){ }
     
-    public CatalogoDTO(String nombre) {
+    public CatalogoDTO(String nombre, int tipo) {
         this.Nombre = nombre;
+        this.Id_tipo = tipo;
     }
     
     public CatalogoDTO(int id_catalogo, String nombre, String estado, String fecha_creacion, String fecha_modificacion, int id_tipo, int id_padre) {
