@@ -3,7 +3,6 @@ DROP TABLE IF EXISTS Factura;
 DROP TABLE IF EXISTS MetodoPago;
 DROP TABLE IF EXISTS NOTA;
 DROP TABLE IF EXISTS Estudiante_curso;
-DROP TABLE IF EXISTS Modulo_actividad;
 DROP TABLE IF EXISTS Curso;
 DROP TABLE IF EXISTS Persona;
 DROP TABLE IF EXISTS CATALOGO;
@@ -99,25 +98,19 @@ CREATE TABLE Curso(
 );
 
 
-CREATE TABLE Modulo_actividad(
-    Id_modulo_actividad INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
-    ,Id_actividad INTEGER NOT NULL REFERENCES Actividad_tipo(Id_actividad)
-    ,Id_modulo INTEGER NOT NULL REFERENCES Modulo(Id_modulo)
-    ,Descripcion TEXT
-    ,Fecha_inicio DATETIME NOT NULL
-    ,Fecha_fin DATETIME NOT NULL
-    ,Nota_max INTEGER NOT NULL
-    ,Ponderacion INTEGER NOT NULL
-    ,Estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
-    ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
-    ,Fecha_modificacion DATETIME
-);
+
 CREATE TABLE Estudiante_curso(
     Id_estudiante_curso INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
     ,Id_estudiante INTEGER NOT NULL REFERENCES Persona(Id_persona)
     ,Id_curso  INTEGER NOT NULL REFERENCES Curso(Id_curso)
     ,Id_catalogo_curso INTEGER NOT NULL REFERENCES CATALOGO(Id_catalogo)
+    
+    ,Estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
+    ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
+    ,Fecha_modificacion DATETIME
 );
+
+
 CREATE TABLE Nota (
     Id_nota INTEGER NOT NULL PRIMARY KEY
     ,Id_estudiante_curso INTEGER NOT NULL REFERENCES Estudiante_curso(Id_estudiante_curso)
