@@ -1,6 +1,6 @@
 -- database: ../Data_Base/policurso.sqlite
 
-INSERT INTO CATALOGO_TIPO ( Nombre) VALUES
+INSERT INTO CATALOGO_TIPO ( nombre) VALUES
 ('Países'),
 ('Categorías'),
 ('Idiomas'),
@@ -12,7 +12,7 @@ INSERT INTO CATALOGO_TIPO ( Nombre) VALUES
 ('Materias'),
 ('Especialidades');
 
-INSERT INTO CATALOGO (Nombre, Id_tipo, Id_padre) VALUES
+INSERT INTO CATALOGO (nombre, id_tipo, id_padre) VALUES
 ( 'Ecuador',1,1),
 ( 'Estados Unidos', 1,1),
 ( 'Programación', 2,1),
@@ -34,48 +34,30 @@ INSERT INTO CATALOGO (Nombre, Id_tipo, Id_padre) VALUES
 ('Gerente', 5, 1),
 ('Supervisor', 5, 1);
 
-INSERT INTO Rol (Nombre) VALUES
-('Administrador'),
-('Estudiante'),
-('Tutor'),
-('Docente'),
-('Investigador');
 
--- Inserción en Sexo
-INSERT INTO Sexo (Nombre) VALUES
-('Masculino'),
-('Femenino'),
-('Otro');
+INSERT INTO Persona (nombre, apellido, correo, descripcion, clave, id_catalogo_pais, fecha_nacimiento) VALUES
+('Juan', 'Pérez', 'juan.perez@example.com', 'Tutor de programación', 'clave123', 1, '1990-05-15'),
+('Ana', 'Gómez', 'ana.gomez@example.com', 'Estudiante apasionada por bases de datos', 'clave456', 2, '2000-08-20'),
+('Carlos', 'Martínez', 'carlos.martinez@example.com', 'Experto en idiomas', 'clave789', 1, '1985-03-10'),
+('Lucía', 'Ramírez', 'lucia.ramirez@example.com', 'Investigadora académica', 'clave101', 2, '1995-12-12'),
+('Diego', 'García', 'diego.garcia@example.com', 'Estudiante de nivel intermedio', 'clave202', 1, '1997-07-25'),
+('María', 'Fernández', 'maria.fernandez@example.com', 'Estudiante destacada', 'clave303', 2, '1992-06-10'),
+('Laura', 'Gómez', 'laura.gomez@example.com', 'Docente de bases de datos', 'clave404', 1, '1988-01-15'),
+('Pedro', 'Lopez', 'pedro.lopez@example.com', 'Tutor avanzado', 'clave505', 1, '1983-09-22'),
+('Andrea', 'Sánchez', 'andrea.sanchez@example.com', 'Estudiante avanzada', 'clave606', 2, '1999-04-05'),
+('Jorge', 'Hernández', 'jorge.hernandez@example.com', 'Especialista en administración', 'clave707', 1, '1987-11-03'),
+('Luis', 'Ortiz', 'luis.ortiz@example.com', 'Estudiante de nivel básico', 'clave808', 1, '1998-01-10'),
+('Sofía', 'Mendoza', 'sofia.mendoza@example.com', 'Tutora avanzada en matemáticas', 'clave909', 2, '1991-09-19'),
+('Tomás', 'Reyes', 'tomas.reyes@example.com', 'Docente en física', 'clave010', 1, '1980-11-21'),
+('Natalia', 'Morales', 'natalia.morales@example.com', 'Especialista en francés', 'clave111', 2, '1993-06-25'),
+('Sergio', 'Vargas', 'sergio.vargas@example.com', 'Administrador de proyectos', 'clave212', 1, '1986-03-15'),
+('Claudia', 'Castro', 'claudia.castro@example.com', 'Estudiante en diseño gráfico', 'clave313', 2, '2002-07-30'),
+('Gabriel', 'Hernández', 'gabriel.hernandez@example.com', 'Tutor en programación avanzada', 'clave414', 1, '1978-04-10'),
+('Isabel', 'Suárez', 'isabel.suarez@example.com', 'Estudiante destacada en marketing', 'clave515', 2, '1997-10-20'),
+('Ricardo', 'Jiménez', 'ricardo.jimenez@example.com', 'Investigador en inteligencia artificial', 'clave616', 1, '1984-08-17'),
+('Carmen', 'López', 'carmen.lopez@example.com', 'Estudiante de proyectos académicos', 'clave717', 2, '1995-12-05');
 
-INSERT INTO MetodoPago (Nombre) VALUES
-('Tarjeta de Crédito'),
-('PayPal'),
-('Transferencia Bancaria'),
-('Efectivo');
-
-INSERT INTO Persona (Id_rol, Id_sexo, Cedula, Nombre, Apellido, Correo, Descripcion, Clave, Id_catalogo_pais, Fecha_nacimiento) VALUES
-(2, 1, '1723456789', 'Juan', 'Pérez', 'juan.perez@example.com', 'Tutor de programación', 'clave123', 1, '1990-05-15'),
-(2, 2, '1712345678', 'Ana', 'Gómez', 'ana.gomez@example.com', 'Estudiante apasionada por bases de datos', 'clave456', 2, '2000-08-20'),
-(3, 1, '1728765432', 'Carlos', 'Martínez', 'carlos.martinez@example.com', 'Experto en idiomas', 'clave789', 1, '1985-03-10'),
-(4, 2, '1734567890', 'Lucía', 'Ramírez', 'lucia.ramirez@example.com', 'Investigadora académica', 'clave101', 2, '1995-12-12'),
-(2, 1, '1745678901', 'Diego', 'García', 'diego.garcia@example.com', 'Estudiante de nivel intermedio', 'clave202', 1, '1997-07-25'),
-(2, 2, '1756789012', 'María', 'Fernández', 'maria.fernandez@example.com', 'Estudiante destacada', 'clave303', 2, '1992-06-10'),
-(4, 2, '1767890123', 'Laura', 'Gómez', 'laura.gomez@example.com', 'Docente de bases de datos', 'clave404', 1, '1988-01-15'),
-(3, 1, '1778901234', 'Pedro', 'Lopez', 'pedro.lopez@example.com', 'Tutor avanzado', 'clave505', 1, '1983-09-22'),
-(2, 2, '1789012345', 'Andrea', 'Sánchez', 'andrea.sanchez@example.com', 'Estudiante avanzada', 'clave606', 2, '1999-04-05'),
-(5, 1, '1790123456', 'Jorge', 'Hernández', 'jorge.hernandez@example.com', 'Especialista en administración', 'clave707', 1, '1987-11-03'),
-(2, 1, '1801234567', 'Luis', 'Ortiz', 'luis.ortiz@example.com', 'Estudiante de nivel básico', 'clave808', 1, '1998-01-10'),
-(4, 2, '1812345678', 'Sofía', 'Mendoza', 'sofia.mendoza@example.com', 'Tutora avanzada en matemáticas', 'clave909', 2, '1991-09-19'),
-(4, 1, '1823456789', 'Tomás', 'Reyes', 'tomas.reyes@example.com', 'Docente en física', 'clave010', 1, '1980-11-21'),
-(3, 2, '1834567890', 'Natalia', 'Morales', 'natalia.morales@example.com', 'Especialista en francés', 'clave111', 2, '1993-06-25'),
-(5, 1, '1845678901', 'Sergio', 'Vargas', 'sergio.vargas@example.com', 'Administrador de proyectos', 'clave212', 1, '1986-03-15'),
-(2, 2, '1856789012', 'Claudia', 'Castro', 'claudia.castro@example.com', 'Estudiante en diseño gráfico', 'clave313', 2, '2002-07-30'),
-(3, 1, '1867890123', 'Gabriel', 'Hernández', 'gabriel.hernandez@example.com', 'Tutor en programación avanzada', 'clave414', 1, '1978-04-10'),
-(2, 2, '1878901234', 'Isabel', 'Suárez', 'isabel.suarez@example.com', 'Estudiante destacada en marketing', 'clave515', 2, '1997-10-20'),
-(3, 1, '1889012345', 'Ricardo', 'Jiménez', 'ricardo.jimenez@example.com', 'Investigador en inteligencia artificial', 'clave616', 1, '1984-08-17'),
-(2, 2, '1890123456', 'Carmen', 'López', 'carmen.lopez@example.com', 'Estudiante de proyectos académicos', 'clave717', 2, '1995-12-05');
-
-INSERT INTO Curso (Id_tutor,Nombre, Descripcion, Id_catalogo_categoria, Id_catalogo_subcategoria, Id_catalogo_idioma, Id_catalogo_nivel, Fecha_inicio, Fecha_fin, Nota_aprobacion, Duracion) VALUES
+INSERT INTO Curso (id_tutor,nombre, descripcion, id_catalogo_categoria, id_catalogo_subcategoria, id_catalogo_idioma, id_catalogo_nivel, fecha_inicio, fecha_fin, Nota_aprobacion, Duracion) VALUES
 (1, 'Curso Básico de Programación', 'Curso introductorio para principiantes.', 3, 4, 5, 7, '2025-02-01', '2025-03-01', 70, 30),
 (1, 'Bases de Datos Relacionales', 'Curso intermedio sobre bases de datos.', 3, 4, 5, 8, '2025-03-05', '2025-04-05', 75, 40),
 (1, 'Curso de Inglés Básico', 'Aprendizaje del idioma inglés desde cero.', 6, 6, 6, 7, '2025-02-15', '2025-03-15', 65, 25),
@@ -97,30 +79,7 @@ INSERT INTO Curso (Id_tutor,Nombre, Descripcion, Id_catalogo_categoria, Id_catal
 (10, 'Cursos Prácticos de Diseño', 'Creación de proyectos de diseño gráfico.', 3, 4, 5, 9, '2025-06-10', '2025-07-10', 80, 25),
 (1, 'Gestión de Equipos', 'Formación en manejo y liderazgo de equipos.', 3, 4, 5, 9, '2025-05-25', '2025-06-25', 75, 30);
 
-INSERT INTO Factura (Id_factura,Id_curso, Id_persona, Monto_total, Id_metodo_pago) VALUES
-(1, 1, 1, 1000.00, 1),
-(2, 2, 2, 1200.00, 2),
-(3, 3, 3, 1500.00, 3),
-(4, 4, 4, 1800.00, 4),
-(5, 5, 5, 2000.00, 1),
-(6, 6, 6, 2200.00, 2),
-(7, 7, 7, 2500.00, 3),
-(8, 8, 8, 2800.00, 4),
-(9, 9, 9, 3000.00, 1),
-(10, 10, 10, 3200.00, 2),
-(11, 11, 11, 3500.00, 3),
-(12, 12, 12, 3800.00, 4),
-(13, 13, 13, 4100.00, 1),
-(14, 14, 14, 4400.00, 2),
-(15, 15, 15, 4700.00, 3),
-(16, 16, 16, 5000.00, 4),
-(17, 17, 17, 5300.00, 1),
-(18, 18, 18, 5600.00, 2),
-(19, 19, 19, 5900.00, 3),
-(20, 20, 20, 6200.00, 4);
-
-
-INSERT INTO Modulo (Id_curso,Nombre, Descripcion) VALUES
+INSERT INTO Modulo (id_curso,nombre, descripcion) VALUES
 (2,'Introducción', 'Fundamentos básicos del curso.'),
 (2,'SQL Básico', 'Primeros pasos con bases de datos relacionales.'),
 (2,'Gramática Básica', 'Gramática para principiantes en inglés.'),
@@ -142,7 +101,7 @@ INSERT INTO Modulo (Id_curso,Nombre, Descripcion) VALUES
 (7, 'SEO y SEM', 'Optimización de motores de búsqueda.'),
 (8, 'Redes Neuronales', 'Introducción a redes neuronales.');
 
-INSERT INTO Actividad_tipo (Nombre, Descripcion) VALUES
+INSERT INTO Actividad_tipo (nombre, descripcion) VALUES
 ('Tarea', 'Actividad evaluada mediante tareas individuales.'),
 ('Examen', 'Evaluación escrita o práctica.'),
 ('Proyecto', 'Entrega de proyectos finales.'),
@@ -164,7 +123,7 @@ INSERT INTO Actividad_tipo (Nombre, Descripcion) VALUES
 ('Evaluación Oral', 'Presentación evaluada verbalmente.'),
 ('Planificación de Estrategias', 'Creación de estrategias de trabajo.');
 
-INSERT INTO Modulo_actividad (Id_actividad, Id_modulo, Descripcion, Fecha_inicio, Fecha_fin, Nota_max, Ponderacion) VALUES
+INSERT INTO Modulo_actividad (id_actividad, id_modulo, descripcion, fecha_inicio, fecha_fin, Nota_max, Ponderacion) VALUES
 (2,1, 'Tarea inicial del curso.', '2025-02-05', '2025-02-10', 100, 10),
 (2,2, 'Primer examen práctico.', '2025-02-15', '2025-02-20', 100, 20),
 (2,3, 'Proyecto grupal.', '2025-03-01', '2025-03-10', 100, 30),
@@ -186,7 +145,7 @@ INSERT INTO Modulo_actividad (Id_actividad, Id_modulo, Descripcion, Fecha_inicio
 (4, 1, 'Análisis de datos inicial.', '2025-06-05', '2025-06-10', 100, 20),
 (4, 2, 'Planificación estratégica.', '2025-06-15', '2025-06-20', 100, 30);
 
-INSERT INTO Estudiante_curso (Id_estudiante,Id_curso, Id_catalogo_curso) VALUES
+INSERT INTO Estudiante_curso (id_estudiante,id_curso, id_catalogo_curso) VALUES
 (1, 1, 3),
 (2, 2, 4),
 (3, 3, 5),
@@ -208,7 +167,7 @@ INSERT INTO Estudiante_curso (Id_estudiante,Id_curso, Id_catalogo_curso) VALUES
 (10, 1, 5),
 (1, 2, 6);
 
-INSERT INTO Nota (Id_modulo_actividad,Id_estudiante_curso, Nota) VALUES
+INSERT INTO Nota (id_modulo_actividad,id_estudiante_curso, Nota) VALUES
 ( 1,1, 85),
 ( 1,2, 90),
 ( 2,3, 95),
