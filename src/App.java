@@ -4,11 +4,11 @@ import DataAccess.DTO.*;
 public class App {
     public static void main(String[] args) throws Exception {
         try {
-            Estudiante_cursoDAO cDao = new  Estudiante_cursoDAO();
+            NotaDAO cDao = new  NotaDAO();
 
-            cDao.update(new Estudiante_cursoDTO(21, 5, 1, 2, "", "", ""));
+            cDao.update(new NotaDTO(22, 2, 0, "", "", ""));
             
-            for (Estudiante_cursoDTO s : cDao.readAll()) {
+            for (NotaDTO s : cDao.readAll()) {
                 System.out.println(s.toString());
             }
         } catch (Exception e) {

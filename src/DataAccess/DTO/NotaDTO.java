@@ -2,7 +2,6 @@ package DataAccess.DTO;
 
 public class NotaDTO {
     private Integer Id_nota;
-    private Integer Id_modulo_actividad;
     private Integer Id_estudiante_curso;
     private Integer Nota;
     private String Estado;
@@ -11,18 +10,16 @@ public class NotaDTO {
 
     public NotaDTO(){}
 
-    public NotaDTO(Integer Id_modulo_actividad, Integer Id_estudiante_curso, Integer nota) {
-        this.Id_modulo_actividad = Id_modulo_actividad;
-        this.Id_estudiante_curso = Id_estudiante_curso;
+    public NotaDTO(Integer id_estudiante_curso, Integer nota) {;
+        this.Id_estudiante_curso = id_estudiante_curso;
         this.Nota = nota;
     }
 
 
-    public NotaDTO(Integer Id_nota, Integer Id_modulo_actividad, Integer Id_estudiante_curso, Integer nota,
+    public NotaDTO(Integer id_nota, Integer id_estudiante_curso, Integer nota,
             String Estado, String Fecha_creacion, String Fecha_modificacion) {
-        this.Id_nota = Id_nota;
-        this.Id_modulo_actividad = Id_modulo_actividad;
-        this.Id_estudiante_curso = Id_estudiante_curso;
+        this.Id_nota = id_nota;;
+        this.Id_estudiante_curso = id_estudiante_curso;
         this.Nota = nota;
         this.Estado = Estado;
         this.Fecha_creacion = Fecha_creacion;
@@ -36,12 +33,7 @@ public class NotaDTO {
     public void setId_nota(Integer Id_nota) {
         this.Id_nota = Id_nota;
     }
-    public Integer getId_modulo_actividad() {
-        return Id_modulo_actividad;
-    }
-    public void setId_modulo_actividad(Integer Id_modulo_actividad) {
-        this.Id_modulo_actividad = Id_modulo_actividad;
-    }
+
     public Integer getId_estudiante_curso() {
         return Id_estudiante_curso;
     }
@@ -76,7 +68,6 @@ public class NotaDTO {
     public String toString() {
         return getClass().getName()
         + "\n Id_nota:  " + getId_nota()
-        + "\n Id_modulo_actividad:  " + getId_modulo_actividad()
         + "\n Id_estudiante_curso:  " + getId_estudiante_curso()
         + "\n Nota: " + getNota()
         + "\n Estado: " + getEstado()
