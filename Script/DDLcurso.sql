@@ -4,8 +4,6 @@ DROP TABLE IF EXISTS MetodoPago;
 DROP TABLE IF EXISTS NOTA;
 DROP TABLE IF EXISTS Estudiante_curso;
 DROP TABLE IF EXISTS Modulo_actividad;
-DROP TABLE IF EXISTS Actividad_tipo;
-DROP TABLE IF EXISTS Modulo;
 DROP TABLE IF EXISTS Curso;
 DROP TABLE IF EXISTS Persona;
 DROP TABLE IF EXISTS CATALOGO;
@@ -47,8 +45,6 @@ CREATE TABLE MetodoPago (
     ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
     ,Fecha_modificacion DATETIME
 );
-
-
 
 
 CREATE TABLE CATALOGO_TIPO(
@@ -95,35 +91,14 @@ CREATE TABLE Curso(
     ,Descripcion TEXT
     ,Id_catalogo_categoria INTEGER NOT NULL REFERENCES CATALOGO(Id_catalogo)
     ,Id_catalogo_subcategoria INTEGER NOT NULL REFERENCES CATALOGO(Id_catalogo)
-    ,Id_catalogo_idioma INTEGER NOT NULL REFERENCES CATALOGO(Id_catalogo)
     ,Id_catalogo_nivel INTEGER NOT NULL REFERENCES CATALOGO(Id_catalogo)
-    ,Fecha_inicio DATETIME NOT NULL
-    ,Fecha_fin DATETIME NOT NULL
-    ,Nota_aprobacion INTEGER NOT NULL
-    ,Duracion INTEGER NOT NULL
+
     ,Estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
     ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
     ,Fecha_modificacion DATETIME
 );
 
 
-CREATE TABLE Modulo(
-     Id_modulo INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
-    ,Id_curso INTEGER NOT NULL REFERENCES Curso(Id_curso)
-    ,Nombre VARCHAR(25) NOT NULL
-    ,Descripcion TEXT
-    ,Estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
-    ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
-    ,Fecha_modificacion DATETIME
-);
-CREATE TABLE Actividad_tipo(
-    Id_actividad INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT
-    ,Nombre VARCHAR(25) NOT NULL
-    ,Descripcion TEXT
-    ,Estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
-    ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
-    ,Fecha_modificacion DATETIME
-);
 CREATE TABLE Modulo_actividad(
     Id_modulo_actividad INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
     ,Id_actividad INTEGER NOT NULL REFERENCES Actividad_tipo(Id_actividad)
@@ -145,7 +120,6 @@ CREATE TABLE Estudiante_curso(
 );
 CREATE TABLE Nota (
     Id_nota INTEGER NOT NULL PRIMARY KEY
-    ,Id_modulo_actividad INTEGER NOT NULL REFERENCES Modulo_actividad(Id_modulo_actividad)
     ,Id_estudiante_curso INTEGER NOT NULL REFERENCES Estudiante_curso(Id_estudiante_curso)
     ,Nota INTEGER NOT NULL
     ,Estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
