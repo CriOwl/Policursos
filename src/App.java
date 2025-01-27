@@ -6,7 +6,7 @@ public class App {
         try {
             FacturaDAO cDao = new  FacturaDAO();
 
-            cDao.create(new FacturaDTO(2, 145.99, 1));
+            cDao.create(new FacturaDTO(1, 1, 160.55, 2));
             
             for (FacturaDTO s : cDao.readAll()) {
                 System.out.println(s.toString());

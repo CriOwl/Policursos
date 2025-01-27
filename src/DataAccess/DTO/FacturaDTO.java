@@ -3,25 +3,29 @@ package DataAccess.DTO;
 
 public class FacturaDTO {
     private Integer Id_factura;
+    private Integer Id_curso;
+    
     private Integer Id_persona;
     private Integer Id_metodo_pago;
     private Double Monto_total;
     private String Estado;
     private String Fecha_creacion;
     private String Fecha_modificacion;
-
+    
     
     public FacturaDTO(){}
     
-    public FacturaDTO(Integer id_persona, Double monto_total, Integer id_metodo_pago) {
+    public FacturaDTO(Integer id_curso, Integer id_persona, Double monto_total, Integer id_metodo_pago) {
+        Id_curso = id_curso;
         Id_persona = id_persona;
         Monto_total = monto_total;
         Id_metodo_pago = id_metodo_pago;
     }
     
-    public FacturaDTO(Integer id_factura, Integer id_persona, Double monto_total, Integer id_metodo_pago,
+    public FacturaDTO(Integer id_factura, Integer id_curso, Integer id_persona, Double monto_total, Integer id_metodo_pago,
     String estado, String fecha_creacion, String fecha_modificacion) {
         Id_factura = id_factura;
+        Id_curso = id_curso;
         Id_persona = id_persona;
         Monto_total = monto_total;
         Id_metodo_pago = id_metodo_pago;
@@ -34,9 +38,17 @@ public class FacturaDTO {
     public Integer getId_factura() {
         return Id_factura;
     }
-
+    
     public void setId_factura(Integer id_factura) {
         Id_factura = id_factura;
+    }
+
+    public Integer getId_curso() {
+        return Id_curso;
+    }
+
+    public void setId_curso(Integer id_curso) {
+        Id_curso = id_curso;
     }
 
     public Integer getId_persona() {
@@ -89,12 +101,13 @@ public class FacturaDTO {
     
     public String toString() {
         return getClass().getName()
-        + "\n Id_factura:  " + getId_factura()
-        + "\n Id_persona:  " + getId_persona()
-        + "\n Id_metodo_pago:  " + getId_metodo_pago()
-        + "\n Monto_total: " + getMonto_total()
-        + "\n Estado: " + getEstado()
-        + "\n FechaCreacion:  " +  getFecha_creacion()
-        + "\n Fecha_modificacion=" + getFecha_modificacion();
+        + "\n Id_factura:           " + getId_factura()
+        + "\n Id_curso:             " + getId_curso()
+        + "\n Id_persona:           " + getId_persona()
+        + "\n Id_metodo_pago:       " + getId_metodo_pago()
+        + "\n Monto_total:          " + getMonto_total()
+        + "\n Estado:               " + getEstado()
+        + "\n FechaCreacion:        " + getFecha_creacion()
+        + "\n Fecha_modificacion=   " + getFecha_modificacion();
     }
 }

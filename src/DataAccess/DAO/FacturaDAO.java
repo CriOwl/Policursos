@@ -19,6 +19,7 @@ public class FacturaDAO extends SQLiteDataHelper implements IDAO<FacturaDTO>{
     public FacturaDTO readBy(Integer id) throws Exception {
         FacturaDTO oS = new FacturaDTO();
         String query =" SELECT Id_factura  " 
+                     +" ,Id_curso        " 
                      +" ,Id_persona        " 
                      +" ,Monto_total        " 
                      +" ,Id_metodo_pago        "
@@ -34,12 +35,13 @@ public class FacturaDAO extends SQLiteDataHelper implements IDAO<FacturaDTO>{
             ResultSet rs   = stmt.executeQuery(query);  // ejecutar la
             while (rs.next()) {
                 oS = new FacturaDTO(rs.getInt(1)        // Id_factura
-                                ,rs.getInt(2)           // Id_persona              
-                                ,rs.getDouble(3)        // Monto_total         
-                                ,rs.getInt(4)           // Id_metodo_pago         
-                                ,rs.getString(3)        // Estado        
-                                ,rs.getString(4)        // Fecha_creacion      
-                                ,rs.getString(5));      // Fecha_modificacion
+                                ,rs.getInt(2)           // Id_curso              
+                                ,rs.getInt(3)           // Id_persona              
+                                ,rs.getDouble(4)        // Monto_total         
+                                ,rs.getInt(5)           // Id_metodo_pago         
+                                ,rs.getString(6)        // Estado        
+                                ,rs.getString(7)        // Fecha_creacion      
+                                ,rs.getString(8));      // Fecha_modificacion
             }
         } 
         catch (SQLException e) {
@@ -52,6 +54,7 @@ public class FacturaDAO extends SQLiteDataHelper implements IDAO<FacturaDTO>{
     public List<FacturaDTO> readAll() throws Exception {
         List <FacturaDTO> lst = new ArrayList<>();
         String query =" SELECT Id_factura  " 
+                     +" ,Id_curso        " 
                      +" ,Id_persona        " 
                      +" ,Monto_total        " 
                      +" ,Id_metodo_pago        "
@@ -68,12 +71,13 @@ public class FacturaDAO extends SQLiteDataHelper implements IDAO<FacturaDTO>{
             ResultSet rs   = stmt.executeQuery(query);    // ejecutar la
             while (rs.next()) {
                 FacturaDTO s = new FacturaDTO( rs.getInt(1)     // Id_factura
-                                              ,rs.getInt(2)           // Id_persona              
-                                              ,rs.getDouble(3)        // Monto_total         
-                                              ,rs.getInt(4)           // Id_metodo_pago         
-                                              ,rs.getString(3)        // Estado        
-                                              ,rs.getString(4)        // Fecha_creacion      
-                                              ,rs.getString(5));      // Fecha_modificacion
+                                              ,rs.getInt(2)           // Id_curso              
+                                              ,rs.getInt(3)           // Id_persona              
+                                              ,rs.getDouble(4)        // Monto_total         
+                                              ,rs.getInt(5)           // Id_metodo_pago         
+                                              ,rs.getString(6)        // Estado        
+                                              ,rs.getString(7)        // Fecha_creacion      
+                                              ,rs.getString(8));      // Fecha_modificacion
                 lst.add(s);
             }
         } 
@@ -85,13 +89,14 @@ public class FacturaDAO extends SQLiteDataHelper implements IDAO<FacturaDTO>{
 
     @Override
     public boolean create(FacturaDTO entity) throws Exception {
-        String query = "INSERT INTO Factura (Id_persona, Monto_total, Id_metodo_pago) VALUES (?, ?, ?)";
+        String query = "INSERT INTO Factura (Id_persona, Id_curso ,Monto_total, Id_metodo_pago) VALUES (?, ?, ?, ?)";
         try {
             Connection conn = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, entity.getId_persona());       // Id_persona
-            pstmt.setDouble(2, entity.getMonto_total());  // Monto_total
-            pstmt.setInt(3, entity.getId_metodo_pago());  // Id_metodo_pago
+            pstmt.setInt(2, entity.getId_curso());       // Id_curso
+            pstmt.setDouble(3, entity.getMonto_total());  // Monto_total
+            pstmt.setInt(4, entity.getId_metodo_pago());  // Id_metodo_pago
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
