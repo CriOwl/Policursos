@@ -76,11 +76,11 @@ CREATE TABLE Persona(
     ,Cedula VARCHAR(10) NOT NULL UNIQUE
     ,Nombre VARCHAR(50) NOT NULL
     ,Apellido VARCHAR(50) NOT NULL
-    ,Correo TEXT NOT NULL
+    ,Correo TEXT 
     ,Descripcion TEXT
     ,Clave  TEXT NOT NULL
     ,Id_catalogo_pais INTEGER NOT NULL REFERENCES CATALOGO(Id_catalogo)
-    ,Fecha_nacimiento DATE NOT NULL
+    ,Fecha_nacimiento DATE
     ,Estado VARCHAR(1) NOT NULL DEFAULT ('A') CONSTRAINT verficador CHECK(Estado IN ('A','I'))
     ,Fecha_creacion DATETIME DEFAULT (datetime('now','localtime'))
     ,Fecha_modificacion DATETIME

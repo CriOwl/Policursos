@@ -113,11 +113,17 @@ public class PersonaDAO extends SQLiteDataHelper implements IDAO<PersonaDTO>{
 
     @Override
     public boolean create(PersonaDTO entity) throws Exception {
-        String query = " INSERT INTO Persona (Nombre) VALUES (?)";
+        String query = " INSERT INTO Persona (Id_rol,Id_sexo,Cedula,Nombre,Apellido,Clave, Id_catalogo_pais) VALUES (?,?,?,?,?,?,?)";
         try {
             Connection        conn  = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, entity.getNombre());
+            pstmt.setInt(1, entity.getId_rol());       // Id_rol
+            pstmt.setInt(2, entity.getId_sexo());       // Id_sexo
+            pstmt.setString(3, entity.getCedula());     //Cedula
+            pstmt.setString(4, entity.getNombre());     //Nombre
+            pstmt.setString(5, entity.getApellido());     //Apellido
+            pstmt.setString(6, entity.getClave());       //Clave
+            pstmt.setInt(7, entity.getId_catalogo_pais());       // Id_pais
             pstmt.executeUpdate();
             return true;
         } 
@@ -130,13 +136,35 @@ public class PersonaDAO extends SQLiteDataHelper implements IDAO<PersonaDTO>{
     public boolean update(PersonaDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
         LocalDateTime now = LocalDateTime.now();
-        String query = " UPDATE Persona SET Nombre = ?, Fecha_modificacion = ? WHERE Id_persona = ?";
+        String query = " UPDATE Persona SET Id_persona = ?"
+                                    +" , Id_rol = ?" 
+                                    +" , Id_sexo = ?" 
+                                    +" , Cedula = ?" 
+                                    +" , Nombre = ?" 
+                                    +" , Apellido = ?" 
+                                    +" , Correo = ?" 
+                                    +" , Descripcion = ?" 
+                                    +" , Clave = ?" 
+                                    +" , Id_catalogo_pais = ?" 
+                                    +" , Fecha_nacimento = ?" 
+                                    +" , Fecha_modificacion = ?" 
+                                    + "WHERE Id_persona = ?";
         try {
             Connection          conn = openConnection();
             PreparedStatement pstmt  = conn.prepareStatement(query);
-            pstmt.setString(1, entity.getNombre());
-            pstmt.setString(2, dtf.format(now).toString());
-            pstmt.setInt(3, entity.getId_persona());
+            pstmt.setInt(1, entity.getId_rol());       // Id_rol
+            pstmt.setInt(2, entity.getId_sexo());       // Id_sexo
+            pstmt.setString(3, entity.getCedula());     //Cedula
+            pstmt.setString(4, entity.getNombre());     //Nombre
+            pstmt.setString(5, entity.getApellido());     //Apellido
+            pstmt.setString(6, entity.getCorreo());     //Correo
+            pstmt.setString(7, entity.getDescripcion());     //Descripcion
+            pstmt.setString(8, entity.getClave());       //Clave
+            pstmt.setInt(9, entity.getId_catalogo_pais());       // Id_catalogo_pais
+            pstmt.setString(10, entity.getFecha_nacimiento());       //FechaNacimiento
+            pstmt.setString(11, dtf.format(now).toString());
+            pstmt.setInt(6, entity.getId_persona());
+
             pstmt.executeUpdate();
             return true;
         } 

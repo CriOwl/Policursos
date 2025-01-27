@@ -108,13 +108,21 @@ public class FacturaDAO extends SQLiteDataHelper implements IDAO<FacturaDTO>{
     public boolean update(FacturaDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
         LocalDateTime now = LocalDateTime.now();
-        String query = " UPDATE Factura SET Monto_total = ?, Fecha_modificacion = ? WHERE Id_factura = ?";
+        String query = " UPDATE Factura SET Id_curso = ?"
+                                       +" , Id_persona = ?" 
+                                       +" , Id_metodo_pago = ?" 
+                                       +" , Monto_total = ?" 
+                                       +" , Fecha_modificacion = ?" 
+                                       + "WHERE Id_factura = ?";
         try {
             Connection          conn = openConnection();
             PreparedStatement pstmt  = conn.prepareStatement(query);
-            pstmt.setDouble(1, entity.getMonto_total());
-            pstmt.setString(2, dtf.format(now).toString());
-            pstmt.setInt(3, entity.getId_factura());
+            pstmt.setInt(1, entity.getId_curso());
+            pstmt.setInt(2, entity.getId_persona());
+            pstmt.setInt(3, entity.getId_metodo_pago());
+            pstmt.setDouble(4, entity.getMonto_total());
+            pstmt.setString(5, dtf.format(now).toString());
+            pstmt.setInt(6, entity.getId_factura());
             pstmt.executeUpdate();
             return true;
         } 
