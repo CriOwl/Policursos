@@ -4,20 +4,20 @@ public class PersonaDTO {
     
 
     private Integer Id_persona; 
-    private Integer Id_catalogo_pais;
     private Integer Id_rol;
     private Integer Id_sexo;
     private String Cedula;
-    
     private String Nombre;
     private String Apellido; 
     private String Correo;
     private String Descripcion;
     private String Clave;  
+    private Integer Id_catalogo_pais;
     private String Fecha_nacimiento; 
     private String Estado;
     private String Fecha_creacion;
     private String Fecha_modificacion;
+    
     
     public PersonaDTO(){}
     

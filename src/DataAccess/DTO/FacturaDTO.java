@@ -4,10 +4,9 @@ package DataAccess.DTO;
 public class FacturaDTO {
     private Integer Id_factura;
     private Integer Id_curso;
-    
     private Integer Id_persona;
-    private Integer Id_metodo_pago;
     private Double Monto_total;
+    private Integer Id_metodo_pago;
     private String Estado;
     private String Fecha_creacion;
     private String Fecha_modificacion;

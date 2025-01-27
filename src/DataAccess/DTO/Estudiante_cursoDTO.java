@@ -1,44 +1,43 @@
 package DataAccess.DTO;
 
 public class Estudiante_cursoDTO {
-    private Integer id_estudiante_curso;
-    private Integer id_estudiante;
-    private Integer id_curso;
-    private Integer id_catalogo_curso;
+    private Integer Id_estudiante_curso;
+    private Integer Id_estudiante;
+    private Integer Id_curso;
+    private Integer Id_catalogo_curso;
     
     public Estudiante_cursoDTO(){}
 
-    public Estudiante_cursoDTO(Integer id_estudiante_curso, Integer id_estudiante, Integer id_curso,
-            Integer id_catalogo_curso) {
-        this.id_estudiante_curso = id_estudiante_curso;
-        this.id_estudiante = id_estudiante;
-        this.id_curso = id_curso;
-        this.id_catalogo_curso = id_catalogo_curso;
+    public Estudiante_cursoDTO(Integer Id_estudiante, Integer Id_curso,
+            Integer Id_catalogo_curso) {
+        this.Id_estudiante = Id_estudiante;
+        this.Id_curso = Id_curso;
+        this.Id_catalogo_curso = Id_catalogo_curso;
     }
 
     public Integer getId_estudiante_curso() {
-        return id_estudiante_curso;
+        return Id_estudiante_curso;
     }
-    public void setId_estudiante_curso(Integer id_estudiante_curso) {
-        this.id_estudiante_curso = id_estudiante_curso;
+    public void setId_estudiante_curso(Integer Id_estudiante_curso) {
+        this.Id_estudiante_curso = Id_estudiante_curso;
     }
     public Integer getId_estudiante() {
-        return id_estudiante;
+        return Id_estudiante;
     }
-    public void setId_estudiante(Integer id_estudiante) {
-        this.id_estudiante = id_estudiante;
+    public void setId_estudiante(Integer Id_estudiante) {
+        this.Id_estudiante = Id_estudiante;
     }
     public Integer getId_curso() {
-        return id_curso;
+        return Id_curso;
     }
-    public void setId_curso(Integer id_curso) {
-        this.id_curso = id_curso;
+    public void setId_curso(Integer Id_curso) {
+        this.Id_curso = Id_curso;
     }
     public Integer getId_catalogo_curso() {
-        return id_catalogo_curso;
+        return Id_catalogo_curso;
     }
-    public void setId_catalogo_curso(Integer id_catalogo_curso) {
-        this.id_catalogo_curso = id_catalogo_curso;
+    public void setId_catalogo_curso(Integer Id_catalogo_curso) {
+        this.Id_catalogo_curso = Id_catalogo_curso;
     }
 
     public String toString() {

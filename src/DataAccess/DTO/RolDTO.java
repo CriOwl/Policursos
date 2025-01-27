@@ -15,7 +15,6 @@ public class RolDTO {
         this.Nombre = nombre;
     }
     public RolDTO(Integer id_rol, String nombre, String estado, String fecha_creacion, String fecha_modificacion) {
-        this.Id_rol = id_rol;
         this.Nombre = nombre;
         this.Estado = estado;
         this.Fecha_creacion = fecha_creacion;
