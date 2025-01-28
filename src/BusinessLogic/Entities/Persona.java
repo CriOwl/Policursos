@@ -21,8 +21,6 @@ public abstract class Persona implements IPersona{
     public boolean ingresar(String cedula, String clave) {
         return this.cedula.equals(cedula) && this.clave.equals(clave);
     }
-
-
     
     public String getRol() {
         return rol;
