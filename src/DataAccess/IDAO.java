@@ -1,4 +1,4 @@
-package DataAccess.DAO;
+package DataAccess;
 
 import java.util.List;
 
