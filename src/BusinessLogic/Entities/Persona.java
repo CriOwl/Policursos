@@ -1,14 +1,10 @@
 package BusinessLogic.Entities;
 
 import BusinessLogic.BLFactory;
-import DataAccess.DAO.PersonaDAO;
-import DataAccess.DTO.PersonaDTO;
+import DataAccess.DAO.CursoDAO;
+import DataAccess.DTO.CursoDTO;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public abstract class Persona implements IPersona {
-    private int idPersona;
+public abstract class Persona implements IPersona{
     private String rol;
     private String sexo;
     private String cedula;
@@ -19,26 +15,17 @@ public abstract class Persona implements IPersona {
     private String fechaNacimiento;
     private String pais;
 
+    
     public Persona(String cedula, String clave) {
         this.cedula = cedula;
         this.clave = clave;
     }
-
+    
     @Override
     public boolean ingresar(String cedula, String clave) {
         return this.cedula.equals(cedula) && this.clave.equals(clave);
     }
-
-    // Getters y setters
-
-    public int getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(int idPersona) {
-        this.idPersona = idPersona;
-    }
-
+    
     public String getRol() {
         return rol;
     }
@@ -110,38 +97,50 @@ public abstract class Persona implements IPersona {
     public void setPais(String pais) {
         this.pais = pais;
     }
-
-
-    public static Persona getPersonaById(int id) throws Exception {
-        BLFactory<PersonaDTO> personaFactory = new BLFactory<>(PersonaDAO::new);
-        PersonaDTO personaDTO = personaFactory.getBy(id);
-        return new Estudiante(personaDTO.getCedula(), personaDTO.getClave()); 
+    
+    private static void getRolDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.rol = oPersona.getBy(1).getRol(); 
     }
 
-    public static List<Persona> getAllPersonas() throws Exception {
-        BLFactory<PersonaDTO> personaFactory = new BLFactory<>(PersonaDAO::new);
-        List<PersonaDTO> personaDTOList = personaFactory.getAll();
-        List<Persona> personas = new ArrayList<>();
-        for (PersonaDTO dto : personaDTOList) {
-            personas.add(new Estudiante(dto.getCedula(), dto.getClave())); 
-        }
-        return personas;
+    private static void getSexoDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.sexo = oPersona.getBy(1).getSexo(); 
     }
 
-    public static boolean addPersona(Persona persona) throws Exception {
-        BLFactory<PersonaDTO> personaFactory = new BLFactory<>(PersonaDAO::new);
-        PersonaDTO personaDTO = new PersonaDTO(persona.getIdRol(), persona.getIdSexo(), persona.getCedula(), persona.getNombre(), persona.getApellido(), persona.getClave(), persona.getIdCatalogoPais());
-        return personaFactory.add(personaDTO);
+    private static void getCedulaDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.cedula = oPersona.getBy(1).getCedula(); 
     }
 
-    public static boolean updatePersona(Persona persona) throws Exception {
-        BLFactory<PersonaDTO> personaFactory = new BLFactory<>(PersonaDAO::new);
-        PersonaDTO personaDTO = new PersonaDTO(persona.getIdPersona(), persona.getIdRol(), persona.getIdSexo(), persona.getCedula(), persona.getNombre(), persona.getApellido(), persona.getCorreo(), persona.getDescripcion(), persona.getClave(), persona.getIdCatalogoPais(), persona.getFechaNacimiento(), persona.getEstado(), persona.getFechaCreacion(), persona.getFechaModificacion());
-        return personaFactory.upd(personaDTO);
+    private static void getNombreDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.nombre = oPersona.getBy(1).getNombre(); 
     }
 
-    public static boolean deletePersona(int id) throws Exception {
-        BLFactory<PersonaDTO> personaFactory = new BLFactory<>(PersonaDAO::new);
-        return personaFactory.del(id);
+    private static void getApellidoDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.apellido = oPersona.getBy(1).getApellido(); 
     }
+
+    private static void getCorreoDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.correo = oPersona.getBy(1).getCorreo(); 
+    }
+
+    private static void getClaveDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.clave = oPersona.getBy(1).getClave(); 
+    }
+
+    private static void getFechaNacimientoDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.fechaNacimiento = oPersona.getBy(1).getFecha_nacimiento(); 
+    }
+
+    private static void getPaisDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.pais = oPersona.getBy(1).getPais(); 
+    }
+
 }
