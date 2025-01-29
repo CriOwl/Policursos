@@ -1,6 +1,8 @@
 package BusinessLogic.Entities;
 
 import BusinessLogic.BLFactory;
+import DataAccess.DAO.CursoDAO;
+import DataAccess.DTO.CursoDTO;
 
 public class Curso {
     private String nombre;
