@@ -4,7 +4,11 @@ import BusinessLogic.BLFactory;
 import DataAccess.DAO.CursoDAO;
 import DataAccess.DTO.CursoDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Curso {
+    private int idCurso;
     private String nombre;
     private String categoria;
     private Estudiante[] estudiantes;
@@ -16,6 +20,13 @@ public class Curso {
         this.estudiantes = estudiantes;
         this.tutor = tutor;
     }
+
+    public Curso(int idCurso, String nombre, String categoria) {
+        this.idCurso = idCurso;
+        this.nombre = nombre;
+        this.categoria = categoria;
+    }
+
 
     public String getNombre() {
         return nombre;
@@ -49,19 +60,38 @@ public class Curso {
         this.tutor = tutor;
     }
 
-    private static void getNombreDB() throws Exception{
-        BLFactory<CursoDTO> oCursoBL = new BLFactory<>(CursoDAO::new);
-        Curso.nombre = oCurso.getBy(1).getNombre(); 
+
+    public static Curso getCursoById(int id) throws Exception {
+        BLFactory<CursoDTO> cursoFactory = new BLFactory<>(CursoDAO::new);
+        CursoDTO cursoDTO = cursoFactory.getBy(id);
+        return new Curso(cursoDTO.getId_curso(), cursoDTO.getNombre(), cursoDTO.getDescripcion());
     }
 
-    private static void getCategoriaDB() throws Exception{
-        BLFactory<CursoDTO> oCursoBL = new BLFactory<>(CursoDAO::new);
-        Curso.categoria = oCurso.getBy(1).getCategoria(); 
+    public static List<Curso> getAllCursos() throws Exception {
+        BLFactory<CursoDTO> cursoFactory = new BLFactory<>(CursoDAO::new);
+        List<CursoDTO> cursoDTOList = cursoFactory.getAll();
+        List<Curso> cursos = new ArrayList<>();
+        for (CursoDTO dto : cursoDTOList) {
+            cursos.add(new Curso(dto.getId_curso(), dto.getNombre(), dto.getDescripcion()));
+        }
+        return cursos;
     }
 
-    private static void getEstudianteDB() throws Exception{
-        BLFactory<CursoDTO> oCursoBL = new BLFactory<>(CursoDAO::new);
-        Curso.estudiante = oCurso.getBy(1).getEstudiante(); 
+    public static boolean addCurso(Curso curso) throws Exception {
+        BLFactory<CursoDTO> cursoFactory = new BLFactory<>(CursoDAO::new);
+        CursoDTO cursoDTO = new CursoDTO(null, curso.tutor != null ? curso.tutor.getId() : null, curso.getNombre(), curso.getCategoria(), null, null, null, "A", null, null);
+        return cursoFactory.add(cursoDTO);
     }
 
+    public static boolean updateCurso(Curso curso) throws Exception {
+        BLFactory<CursoDTO> cursoFactory = new BLFactory<>(CursoDAO::new);
+        CursoDTO cursoDTO = new CursoDTO(curso.getIdCurso(), curso.tutor != null ? curso.tutor.getId() : null, curso.getNombre(), curso.getCategoria(), null, null, null, "A", null, null);
+        return cursoFactory.upd(cursoDTO);
+    }
+
+    public static boolean deleteCurso(int id) throws Exception {
+        BLFactory<CursoDTO> cursoFactory = new BLFactory<>(CursoDAO::new);
+        return cursoFactory.del(id);
+    }
 }
+
