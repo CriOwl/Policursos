@@ -1,5 +1,7 @@
 package BusinessLogic.Entities;
 
+import BusinessLogic.BLFactory;
+
 public class Curso {
     private String nombre;
     private String categoria;
