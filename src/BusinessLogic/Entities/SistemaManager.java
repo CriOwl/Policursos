@@ -1,9 +1,10 @@
-package BusinessLogic;
+package BusinessLogic.Entities;
 
-import DataAccess.DAO.*;
-import DataAccess.DTO.*;
+import DataAccess.IDAO;
 import java.util.List;
 import java.util.function.Supplier;
+
+import BusinessLogic.BLFactory;
 
 public class SistemaManager {
     private static SistemaManager instance;
