@@ -16,4 +16,5 @@ public class Tutor extends Persona implements ITutor{
         estudiante.setNota(nota);
         System.out.println("El tutor ha calificado al estudiante " + estudiante.getNombre() + " con una nota de " + nota);
     }
+
 }

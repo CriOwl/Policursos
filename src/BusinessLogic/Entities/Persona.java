@@ -98,4 +98,49 @@ public abstract class Persona implements IPersona{
         this.pais = pais;
     }
     
+    private static void getRolDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.rol = oPersona.getBy(1).getRol(); 
+    }
+
+    private static void getSexoDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.sexo = oPersona.getBy(1).getSexo(); 
+    }
+
+    private static void getCedulaDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.cedula = oPersona.getBy(1).getCedula(); 
+    }
+
+    private static void getNombreDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.nombre = oPersona.getBy(1).getNombre(); 
+    }
+
+    private static void getApellidoDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.apellido = oPersona.getBy(1).getApellido(); 
+    }
+
+    private static void getCorreoDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.correo = oPersona.getBy(1).getCorreo(); 
+    }
+
+    private static void getClaveDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.clave = oPersona.getBy(1).getClave(); 
+    }
+
+    private static void getFechaNacimientoDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.fechaNacimiento = oPersona.getBy(1).getFecha_nacimiento(); 
+    }
+
+    private static void getPaisDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.pais = oPersona.getBy(1).getPais(); 
+    }
+
 }
