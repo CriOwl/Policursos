@@ -16,5 +16,4 @@ public class Estudiante extends Persona{
     public void setNota(double nota) {
         this.nota = nota;
     }
-
 }

@@ -1,5 +1,9 @@
 package BusinessLogic.Entities;
 
+import BusinessLogic.BLFactory;
+import DataAccess.DAO.CursoDAO;
+import DataAccess.DTO.CursoDTO;
+
 public abstract class Persona implements IPersona{
     private String rol;
     private String sexo;
@@ -92,6 +96,36 @@ public abstract class Persona implements IPersona{
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+    
+    private static void getNombreDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.nombre = oPersona.getBy(1).getNombre(); 
+    }
+
+    private static void getApellidoDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.apellido = oPersona.getBy(1).getApellido(); 
+    }
+
+    private static void getCorreoDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.correo = oPersona.getBy(1).getCorreo(); 
+    }
+
+    private static void getClaveDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.clave = oPersona.getBy(1).getClave(); 
+    }
+
+    private static void getFechaNacimientoDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.fechaNacimiento = oPersona.getBy(1).getFecha_nacimiento(); 
+    }
+
+    private static void getPaisDB() throws Exception{
+        BLFactory<PersonaDTO> oPersonaBL = new BLFactory<>(PersonaDAO::new);
+        Persona.pais = oPersona.getBy(1).getPais(); 
     }
 
 }
