@@ -17,11 +17,7 @@ public class Curso {
         this.tutor = tutor;
     }
 
-    public String getNombre() throws Exception {
-        if(nombre == null){
-            BLFactory<CursoDTO> oCursoBL = new BLFactory<>(CursoDAO::new);
-            this.nombre = oCursoBL.getBy(1).getNombre();
-        }
+    public String getNombre() {
         return nombre;
     }
 
@@ -29,11 +25,7 @@ public class Curso {
         this.nombre = nombre;
     }
 
-    public String getCategoria() throws Exception {
-        if(categoria == null){
-            BLFactory<CursoDTO> oCursoBL = new BLFactory<>(CursoDAO::new);
-            this.categoria = oCursoBL.getBy(1).getCategoria();
-        }
+    public String getCategoria() {
         return categoria;
     }
 
@@ -41,11 +33,7 @@ public class Curso {
         this.categoria = categoria;
     }
 
-    public Estudiante[] getEstudiantes() throws Exception {
-        if(estudiantes == null){
-            BLFactory<CursoDTO> oCursoBL = new BLFactory<>(CursoDAO::new);
-            CursoDTO cursoDTO = oCursoBL.getBy(1);
-        }
+    public Estudiante[] getEstudiantes() {
         return estudiantes;
     }
 
@@ -53,11 +41,7 @@ public class Curso {
         this.estudiantes = estudiantes;
     }
 
-    public Tutor getTutor() throws Exception {
-        if(tutor == null){
-            BLFactory<CursoDTO> oCursoBL = new BLFactory<>(CursoDAO::new);
-            CursoDTO cursoDTO = oCursoBL.getBy(1);
-        }
+    public Tutor getTutor() {
         return tutor;
     }
 
