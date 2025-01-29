@@ -48,9 +48,4 @@ public class Curso {
     public void setTutor(Tutor tutor) {
         this.tutor = tutor;
     }
-
-    private static void getNombreDB() throws Exception{
-        BLFactory<CursoDTO> oCursoBL = new BLFactory<>(CursoDAO::new);
-        Curso.nombre = oCurso.getBy(1).getNombre(); 
-    }
 }
