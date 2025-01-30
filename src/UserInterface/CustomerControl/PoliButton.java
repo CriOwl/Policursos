@@ -11,13 +11,13 @@ import UserInterface.PoliCursoStyle;
 
 public class PoliButton extends JButton implements MouseListener{
 
-    
-    public void PoliButton(String text) {
+
+    public  PoliButton(String text) {
         customizeComponent(text);
     }
 
 
-    public void PoliButton(String text, String iconPath) {
+    public  PoliButton(String text, String iconPath) {
         customizeComponent(text, iconPath);
     }
 
