@@ -1,7 +1,7 @@
 import DataAccess.DAO.*;
 import DataAccess.DTO.*;
-
 import BusinessLogic.Entities.*;
+
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -23,8 +23,6 @@ public class App {
         tutor1.calificarEstudiante(estudiante1, 8.5);
 
         sistema.crearCertificadoAprob(estudiante1);
-
-        
-        
     }
+        
 }
