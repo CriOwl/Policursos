@@ -1,5 +1,7 @@
 import DataAccess.DAO.*;
 import DataAccess.DTO.*;
+import UserInterface.Form.MainForm;
+import UserInterface.Form.SplashScreenForm;
 import BusinessLogic.Entities.*;
 
 
@@ -23,6 +25,12 @@ public class App {
         tutor1.calificarEstudiante(estudiante1, 8.5);
 
         sistema.crearCertificadoAprob(estudiante1);
+
+        SplashScreenForm.mostarSplash();
+        
+        MainForm frmMain  = new MainForm("PoliCursos");
+        frmMain.setVisible(true);
+
     }
         
 }
