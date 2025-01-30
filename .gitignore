@@ -1,4 +1,3 @@
 *.sqlite
-*.class
 /vs.code/
 /bin/
