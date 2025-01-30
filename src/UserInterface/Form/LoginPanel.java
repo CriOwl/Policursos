@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
-import UserInterface.CustomerControl.PoliButton;
 import UserInterface.CustomerControl.PoliLabel;
 import UserInterface.CustomerControl.PoliLabelText;
 import UserInterface.CustomerControl.PoliTextBox;

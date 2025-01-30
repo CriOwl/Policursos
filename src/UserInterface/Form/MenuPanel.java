@@ -27,6 +27,7 @@ public class MenuPanel extends JPanel{
     private void customizeComponent() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setPreferredSize(new Dimension(200, getHeight()));
+        
         try{
             Image logo = ImageIO.read(PoliCursoStyle.URL_LOGO);
             logo = logo.getScaledInstance(100, 100, Image.SCALE_SMOOTH);

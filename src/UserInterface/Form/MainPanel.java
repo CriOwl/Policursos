@@ -1,6 +1,7 @@
 package UserInterface.Form;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -15,6 +16,7 @@ public class MainPanel extends JPanel {
 
     private void customizeComponent(){
         try {
+            setBackground(new Color(250,250,250));
             ImageIcon imageIcon = new ImageIcon(PoliCursoStyle.URL_MAIN);
             add(new JLabel(imageIcon), BorderLayout.CENTER);
         } catch (Exception e) {

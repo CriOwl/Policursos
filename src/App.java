@@ -26,7 +26,7 @@ public class App {
 
         sistema.crearCertificadoAprob(estudiante1);
 
-        SplashScreenForm.mostarSplash();
+        //SplashScreenForm.mostarSplash();
         
         MainForm frmMain  = new MainForm("PoliCursos");
         frmMain.setVisible(true);

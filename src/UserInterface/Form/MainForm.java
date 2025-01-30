@@ -5,17 +5,25 @@ import java.awt.Container;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+
+import com.formdev.flatlaf.intellijthemes.FlatCobalt2IJTheme;
+
 
 public class MainForm extends JFrame{
     MenuPanel   pnlMenu = new MenuPanel();
     JPanel      pnlMain = new MainPanel();
 
     public MainForm(String titleApp) {
-        customizeComponent(titleApp);
-        pnlMenu.btnHome.addActionListener( e -> setPanel(new MainPanel()));
-        pnlMenu.btnLogin.addActionListener( e -> setPanel(new LoginPanel()));
-        pnlMenu.btnPersona.addActionListener( e -> setPanel(new PersonaPanel()));
-        //pnlMenu.btnHome.addActionListener( e -> setPanel(new MainPanel()));
+        try {
+            UIManager.setLookAndFeel(new FlatCobalt2IJTheme());
+        } catch (Exception e) {}
+            customizeComponent(titleApp);
+            pnlMenu.btnHome.addActionListener( e -> setPanel(new MainPanel()));
+            pnlMenu.btnLogin.addActionListener( e -> setPanel(new LoginPanel()));
+            pnlMenu.btnPersona.addActionListener( e -> setPanel(new PersonaPanel()));
+        
+        revalidate();
     }
 
         
