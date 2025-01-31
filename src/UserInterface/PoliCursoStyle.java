@@ -14,15 +14,15 @@ import javax.swing.border.LineBorder;
 public abstract class PoliCursoStyle {
     
     //Colores
-    public static final Color COLOR_FONT = new Color(0, 0, 0);
+    public static final Color COLOR_FONT = new Color(80, 100, 20);
     public static final Color COLOR_FONT_LIGHT = new Color(100, 100, 100);
     public static final Color COLOR_CURSOR = Color.BLACK;
     public static final Color COLOR_BORDER = Color.LIGHT_GRAY;
 
     //Fuente de letra
-    public static final Font FONT = new Font("Arial", Font.PLAIN, 14);
-    public static final Font FONT_BOLD = new Font("Arial", Font.BOLD, 14);
-    public static final Font FONT_SMALL = new Font("Arial", Font.PLAIN, 14);
+    public static final Font FONT = new Font("Comic Sans MS", Font.PLAIN, 14);
+    public static final Font FONT_BOLD = new Font("Comic Sans MS", Font.BOLD, 14);
+    public static final Font FONT_SMALL = new Font("Comic Sans MS", Font.PLAIN, 14);
 
     //Cursores
     public static final Cursor CURSOR_HAND = new Cursor(Cursor.HAND_CURSOR);
@@ -39,7 +39,7 @@ public abstract class PoliCursoStyle {
 
     public static final CompoundBorder createBorderRect(){
         return BorderFactory.createCompoundBorder(
-            new LineBorder(Color.LIGHT_GRAY), new EmptyBorder(5,5,5,5));
+            new LineBorder(Color.LIGHT_GRAY), new EmptyBorder(25,25,25,25));
     }
 
 

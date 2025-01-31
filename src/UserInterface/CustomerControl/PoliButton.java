@@ -22,23 +22,25 @@ public class PoliButton extends JButton implements MouseListener{
     }
 
     public void customizeComponent(String text) {
+        
         setText(text);
         setOpaque(false);
         setFocusPainted(false);
+        setBorderPainted(false);
         setContentAreaFilled(false);
         setForeground(PoliCursoStyle.COLOR_FONT);
         setHorizontalAlignment(PoliCursoStyle.ALIGNMENT_LEFT);
-        //setFont(PoliCursoStyle.FONT);
         setFont(PoliCursoStyle.FONT);
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     public void customizeComponent(String text, String iconPath) {
         setSize(25, 50);
         addMouseListener(this);
         customizeComponent(text);
-        setBounds(50, 30, 90, 20);
+        setBounds(60, 30, 90, 90);
         setIcon(new ImageIcon(iconPath));
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
+        setFont(PoliCursoStyle.FONT);
     }
 
     @Override
@@ -55,13 +57,13 @@ public class PoliButton extends JButton implements MouseListener{
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        setForeground(Color.BLUE);
+        setForeground(Color.BLACK);
         setCursor(PoliCursoStyle.CURSOR_HAND);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        setForeground(Color.GREEN);
+        setForeground(Color.ORANGE);
         setCursor(PoliCursoStyle.CURSOR_DEFAULT);
     }
     
