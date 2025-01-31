@@ -74,5 +74,9 @@ public class App {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        SplashScreenForm.mostarSplash();
+        MainForm frmMain  = new MainForm("PoliCursos");
+        frmMain.setVisible(true);
     }
 }
