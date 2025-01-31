@@ -13,34 +13,39 @@ public class CursoDTO {
     private String Fecha_creacion;
     private String Fecha_modificacion;
     
-    
-    public CursoDTO(){}
-    
+    public CursoDTO() {}
+
     public CursoDTO(Integer id_tutor, String nombre, String descripcion, Integer id_catalogo_categoria,
-            Integer id_catalogo_subcategoria, Integer id_catalogo_nivel) {
-        Id_tutor = id_tutor;
-        Nombre = nombre;
-        Descripcion = descripcion;
-        Id_catalogo_categoria = id_catalogo_categoria;
-        Id_catalogo_subcategoria = id_catalogo_subcategoria;
-        Id_catalogo_nivel = id_catalogo_nivel;
+                    Integer id_catalogo_subcategoria, Integer id_catalogo_nivel,
+                    String estado, String fecha_creacion, String fecha_modificacion) {
+        this.Id_tutor = id_tutor;
+        this.Nombre = nombre;
+        this.Descripcion = descripcion;
+        this.Id_catalogo_categoria = id_catalogo_categoria;
+        this.Id_catalogo_subcategoria = id_catalogo_subcategoria;
+        this.Id_catalogo_nivel = id_catalogo_nivel;
+        this.Estado = estado;
+        this.Fecha_creacion = fecha_creacion;
+        this.Fecha_modificacion = fecha_modificacion;
     }
 
+    // Constructor adicional para instancias que incluyen Id_curso
     public CursoDTO(Integer id_curso, Integer id_tutor, String nombre, String descripcion,
-    Integer id_catalogo_categoria, Integer id_catalogo_subcategoria,
-    Integer id_catalogo_nivel, String estado, String fecha_creacion, String fecha_modificacion) {
-        Id_curso = id_curso;
-        Id_tutor = id_tutor;
-        Nombre = nombre;
-        Descripcion = descripcion;
-        Id_catalogo_categoria = id_catalogo_categoria;
-        Id_catalogo_subcategoria = id_catalogo_subcategoria;
-        Id_catalogo_nivel = id_catalogo_nivel;
-        Estado = estado;
-        Fecha_creacion = fecha_creacion;
-        Fecha_modificacion = fecha_modificacion;
+                    Integer id_catalogo_categoria, Integer id_catalogo_subcategoria,
+                    Integer id_catalogo_nivel, String estado, String fecha_creacion, String fecha_modificacion) {
+        this.Id_curso = id_curso;
+        this.Id_tutor = id_tutor;
+        this.Nombre = nombre;
+        this.Descripcion = descripcion;
+        this.Id_catalogo_categoria = id_catalogo_categoria;
+        this.Id_catalogo_subcategoria = id_catalogo_subcategoria;
+        this.Id_catalogo_nivel = id_catalogo_nivel;
+        this.Estado = estado;
+        this.Fecha_creacion = fecha_creacion;
+        this.Fecha_modificacion = fecha_modificacion;
     }
 
+    // Getters y setters
     public Integer getId_curso() {
         return Id_curso;
     }
@@ -65,12 +70,11 @@ public class CursoDTO {
     public void setId_catalogo_subcategoria(Integer Id_catalogo_subcategoria) {
         this.Id_catalogo_subcategoria = Id_catalogo_subcategoria;
     }
-    
     public Integer getId_catalogo_nivel() {
         return Id_catalogo_nivel;
     }
-    public void setId_catalogo_nivel(Integer id_catalogo_nive) {
-        this.Id_catalogo_nivel = id_catalogo_nive;
+    public void setId_catalogo_nivel(Integer Id_catalogo_nivel) {
+        this.Id_catalogo_nivel = Id_catalogo_nivel;
     }
     public String getNombre() {
         return Nombre;
@@ -104,6 +108,7 @@ public class CursoDTO {
         this.Fecha_modificacion = Fecha_modificacion;
     }
 
+    @Override
     public String toString() {
         return getClass().getName()
         + "\n Id_curso:  " + getId_curso()
@@ -114,7 +119,7 @@ public class CursoDTO {
         + "\n Id_catalogo_subcategoria:  " + getId_catalogo_subcategoria()
         + "\n Id_catalogo_nivel:  " + getId_catalogo_nivel()
         + "\n Estado: " + getEstado()
-        + "\n FechaCreacion:  " +  getFecha_creacion()
-        + "\n Fecha_modificacion=" + getFecha_modificacion();
+        + "\n Fecha_creacion:  " +  getFecha_creacion()
+        + "\n Fecha_modificacion: " + getFecha_modificacion();
     }
 }

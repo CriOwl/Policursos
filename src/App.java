@@ -11,6 +11,7 @@ import BusinessLogic.Entities.*;
 
 public class App {
     /*public static void main(String[] args) throws Exception {
+    /*public static void main(String[] args) throws Exception {
         Estudiante estudiante1 = new Estudiante("1234567890", "clave123", 0);
         Tutor tutor1 = new Tutor("0987654321", "claveTutor");
         Estudiante[] estudiantes = {estudiante1};

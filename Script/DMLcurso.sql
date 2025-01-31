@@ -73,7 +73,28 @@ INSERT INTO Persona (Id_rol, Id_sexo, Cedula, Nombre, Apellido, Correo, Descripc
 (3, 1, '1867890123', 'Gabriel', 'Hernández', 'gabriel.hernandez@example.com', 'Tutor en programación avanzada', 'clave414', 1, '1978-04-10'),
 (2, 2, '1878901234', 'Isabel', 'Suárez', 'isabel.suarez@example.com', 'Estudiante destacada en marketing', 'clave515', 2, '1997-10-20'),
 (3, 1, '1889012345', 'Ricardo', 'Jiménez', 'ricardo.jimenez@example.com', 'Investigador en inteligencia artificial', 'clave616', 1, '1984-08-17'),
-(2, 2, '1890123456', 'Carmen', 'López', 'carmen.lopez@example.com', 'Estudiante de proyectos académicos', 'clave717', 2, '1995-12-05');
+(2, 2, '1890123456', 'Carmen', 'López', 'carmen.lopez@example.com', 'Estudiante de proyectos académicos', 'clave717', 2, '1995-12-05'),
+(4, 1, '1901234567', 'Eduardo', 'González', ' eduardo.gonzalez@example.com', 'Docente en matemáticas', 'clave818', 1, '1989-02-25'),
+(4, 2, '1912345678', 'Patricia', 'Martínez', ' patricia.martinez@example.com', 'Investigadora en ciencias sociales', 'clave919', 2, '1994-07-15'),
+(2, 1, '1923456789', 'Roberto', 'Gómez', ' roberto.gomez@example.com', 'Estudiante de nivel intermedio', 'clave020', 1, '1996-03-10'),
+(2, 2, '1934567890', 'Marcela', 'Fernández', ' marcela.fernandez@example.com', 'Estudiante destacada en biología', 'clave121', 2, '1991-06-20'),
+(4, 2, '1945678901', 'Luisa', 'Gómez', ' luisa.gomez@example.com', 'Docente en física', 'clave222', 1, '1982-11-15'),
+(3, 1, '1956789012', 'Pedro', 'López', ' pedro.lopez@example.com', 'Tutor avanzado en matemáticas', 'clave323', 1, '1987-09-22'),
+(2, 2, '1967890123', 'Andrés', 'Sánchez', ' andres.sanchez@example.com', 'Estudiante de nivel básico', 'clave424', 2, '1998-04-05'),
+(4, 1, '1978901234', 'Jorge', 'Hernández', ' jorge.hernandez@example.com', 'Docente en administración', 'clave525', 1, '1985-11-03'),
+(2, 2, '1989012345', 'Luis', 'Ortiz', ' luis.ortiz@example.com', 'Estudiante de nivel intermedio', 'clave626', 1, '1999-01-10'),
+(2, 1, '1990123456', 'Sofía', 'Mendoza', ' sofia.mendoza@example.com', 'Estudiante destacada en ciencias sociales', 'clave727', 2, '1992-09-19'),
+(4, 2, '2001234567', 'Tomás', 'Reyes', ' tomas.reyes@example.com', 'Investigadora en matemáticas', 'clave828', 1, '1981-11-21'),
+(3, 1, '2012345678', 'Natalia', 'Morales', ' natalia.morales@example.com', 'Tutor en francés', 'clave929', 2, '1994-06-25'),
+(5, 1, '2023456789', 'Sergio', 'Vargas', ' sergio.vargas@example.com', 'Administrador de proyectos', 'clave030', 1, '1986-03-15'),
+(2, 2, '2034567890', 'Claudia', 'Castro', ' claudia.castro@example.com', 'Estudiante en diseño gráfico', 'clave131', 2, '2002-07-30'),
+(3, 1, '2045678901', 'Gabriel', 'Hernández', ' gabriel.hernandez@example.com', 'Tutor en programación avanzada', 'clave232', 1, '1978-04-10'),
+(2, 2, '2056789012', 'Isabel', 'Suárez', ' isabel.suarez@example.com', 'Estudiante destacada en marketing', 'clave333', 2, '1997-10-20'),
+(3, 1, '2067890123', 'Ricardo', 'Jiménez', ' ricardo.jimenez@example.com', 'Investigador en inteligencia artificial', 'clave434', 1, '1984-08-17'),
+(2, 2, '2078901234', 'Carmen', 'López', ' carmen.lopez@example.com', 'Estudiante de proyectos académicos', 'clave535', 2, '1995-12-05'),
+(4, 1, '2089012345', 'Eduardo', 'González', ' eduardo.gonzalez@example.com', 'Docente en matemáticas', 'clave636', 1, '1989-02-25'),
+(4, 2, '2090123456', 'Patricia', 'Martínez', ' patricia.martinez@example.com', 'Investigadora en ciencias sociales', 'clave737', 2, '1994-07-15');
+
 
 INSERT INTO Curso 
 (Id_tutor,        Nombre,                           Descripcion,                           Id_catalogo_categoria, Id_catalogo_subcategoria, Id_catalogo_nivel   ) VALUES
