@@ -3,13 +3,22 @@ package UserInterface.Form;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 
+import BusinessLogic.PersonaBL;
+import DataAccess.DTO.PersonaDTO;
 import UserInterface.PoliCursoStyle;
 import UserInterface.CustomerControl.PoliButton;
 import UserInterface.CustomerControl.PoliLabel;
 import UserInterface.CustomerControl.PoliTextBox;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -23,10 +32,16 @@ import java.awt.event.ActionListener;
 
 public class PersonaPanel extends JPanel implements ActionListener {
     private Integer idPersona = 0, idMaxPersona = 0;
+    private PersonaBL personaBL = null;
+    private PersonaDTO persona = null;
+
     public PersonaPanel() {
         try {
             customizeComponent();
             //metodos para cargar y mostrar datos de la tabla
+            loadRow();
+            showRow();
+            showTabla();
             
 
             btnRowIni.addActionListener(this);
@@ -52,12 +67,114 @@ public class PersonaPanel extends JPanel implements ActionListener {
     private void btnEliminarClick(){}
     private void btnCancelarClick(){}
    
-    
+    private void loadRow() throws Exception{
+        idPersona       = 1;
+        personaBL       = new PersonaBL();
+        persona         = personaBL.getByidPersona(idPersona);
+        idMaxPersona    = personaBL.getMaxRow();
+    }
+
+    private void showRow() throws Exception {
+        boolean personaNull = (persona == null);
+        txtIdPersona.setText((personaNull)? "" : persona.getId_persona().toString());
+        txtNombre.setText((personaNull)? "" : persona.getNombre());
+        lblRegistroTotal.setText(idPersona.toString()+ " de " + idMaxPersona.toString());
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnRowIni)
+            idPersona = 1;
+        if (e.getSource() == btnRowAnt && (idPersona > 1))
+            idPersona--;
+        if (e.getSource() == btnRowSig && (idPersona < idMaxPersona))
+            idPersona++;
+        if (e.getSource() == btnRowFin)
+            idPersona = idMaxPersona;
+        try {
+            persona    = personaBL.getByidPersona(idPersona);
+            showRow(); 
+        } catch (Exception ex) {}
+    }
+
+    private void showTabla() throws Exception {
+        String[] header =   {   "Id", "Rol", "Sexo", 
+                                "Cedula", "Nombre", "Apellido", 
+                                "Correo", "Descripcion", "Clave",
+                                "Catálogo", "Fecha Nacimiento", "Estado", 
+                                "Fecha Creacion", "Fecha Actualización"
+                            };
+        Object[][] data = new Object[personaBL.getAll().size()][14];
+        int inicio = 0;
+        for(PersonaDTO pDTO : personaBL.getAll()){
+            data[inicio][0]     = pDTO.getId_persona();
+            data[inicio][1]     = pDTO.getId_rol();
+            data[inicio][2]     = pDTO.getId_sexo();
+            data[inicio][3]     = pDTO.getCedula();
+            data[inicio][4]     = pDTO.getNombre();
+            data[inicio][5]     = pDTO.getApellido();
+            data[inicio][6]     = pDTO.getCorreo();
+            data[inicio][7]     = pDTO.getDescripcion();
+            data[inicio][8]     = pDTO.getClave();
+            data[inicio][9]     = pDTO.getId_catalogo_pais();
+            data[inicio][10]    = pDTO.getFecha_nacimiento();
+            data[inicio][11]    = pDTO.getEstado();
+            data[inicio][12]    = pDTO.getFecha_creacion();
+            data[inicio][13]    = pDTO.getFecha_modificacion();
+            inicio++;
+        }
+
+        JTable tabla = new JTable(data, header);
+        
+        // Ajustar alineación de celdas
+        DefaultTableCellRenderer render = new DefaultTableCellRenderer();
+        render.setHorizontalAlignment(SwingConstants.LEFT);
+        for (int i = 0; i < tabla.getColumnCount(); i++) {
+            tabla.getColumnModel().getColumn(i).setCellRenderer(render);
+        }
+        
+        tabla.setShowHorizontalLines(true);
+        tabla.setGridColor(Color.BLACK);
+        tabla.setRowSelectionAllowed(true);
+        tabla.setColumnSelectionAllowed(false);
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Desactivar el ajuste automático de tamaño
+        tabla.setPreferredScrollableViewportSize(new Dimension(2000, 300)); // Ajustar el tamaño preferido
+
+        pnlTabla.setLayout(new BorderLayout());
+
+       // Agregar la tabla al panel
+        JScrollPane scrollPane = new JScrollPane(tabla);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        
+        pnlTabla.setLayout(new BorderLayout());
+        pnlTabla.removeAll();
+        pnlTabla.add(scrollPane, BorderLayout.CENTER); // Asegurarse de que el scrollPane se agregue al centro
+    
+        pnlTabla.revalidate();
+        pnlTabla.repaint();
+
+        tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+          
+                int col = 0;
+                int row = tabla.getSelectedRow();
+                String strIdPersona = tabla.getModel().getValueAt(row, col).toString();
+
+                idPersona = Integer.parseInt(strIdPersona);
+                try {
+                    persona = personaBL.getByidPersona(idPersona);
+                    showRow(); 
+                } catch (Exception e1) { }  
+                System.out.println("Tabla.Selected: " + strIdPersona);
+            }
+        });
         
     }
+
+
+    //Diseños
 
     private PoliLabel
         lblTitulo           = new PoliLabel(" Persona"),
@@ -90,6 +207,7 @@ public class PersonaPanel extends JPanel implements ActionListener {
         pnlBtnRow   = new JPanel(new FlowLayout()),
         pnlBtnPage  = new JPanel(new FlowLayout()),
         pnlBtnCRUD  = new JPanel(new FlowLayout());
+        
     
     public void customizeComponent(){
         setLayout(new GridBagLayout());
@@ -198,9 +316,5 @@ public class PersonaPanel extends JPanel implements ActionListener {
         gbc.insets = new Insets(30, 0, 0, 0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         add(pnlBtnCRUD, gbc);
-
-
-        
     }
-    
 }

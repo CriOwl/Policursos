@@ -29,12 +29,12 @@ public class MenuPanel extends JPanel{
     }
 
     private void customizeComponent() {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Layout vertical
-        setPreferredSize(new Dimension(200, getHeight()));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // posicionar en el eje y, verticalmente
+        setPreferredSize(new Dimension(150, getHeight()));
 
         try {
             Image logo = ImageIO.read(PoliCursoStyle.URL_LOGO);
-            logo = logo.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+            logo = logo.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             add(new JLabel(new ImageIcon(logo)));
         } catch (IOException e) {
             System.out.println(e.toString());

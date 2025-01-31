@@ -6,7 +6,6 @@ import UserInterface.Form.SplashScreenForm;
 import java.util.List;
 
 import BusinessLogic.BLFactory;
-import BusinessLogic.Entities.*;
 
 
 public class App {
@@ -39,44 +38,45 @@ public class App {
     }*/
 
     public static void main(String[] args) {
-        try {
+        //try {
          
-            BLFactory<CursoDTO> blFactory = new BLFactory<>(CursoDAO::new);
+        //     BLFactory<CursoDTO> blFactory = new BLFactory<>(CursoDAO::new);
 
 
-            CursoDTO nuevoCurso = new CursoDTO(
-                1, // ID del tutor
-                "Matemáticas", 
-                "Curso de matemáticas básicas", 
-                1, 
-                1, 
-                1,
-                "Activo", 
-                "2025-01-30", 
-                "2025-01-30"
-            );
-            blFactory.add(nuevoCurso);
+        //     CursoDTO nuevoCurso = new CursoDTO(
+        //         1, // ID del tutor
+        //         "Matemáticas", 
+        //         "Curso de matemáticas básicas", 
+        //         1, 
+        //         1, 
+        //         1,
+        //         "Activo", 
+        //         "2025-01-30", 
+        //         "2025-01-30"
+        //     );
+        //     blFactory.add(nuevoCurso);
 
-            List<CursoDTO> todosLosCursos = blFactory.getAll();
-            for (CursoDTO curso : todosLosCursos) {
-                System.out.println(curso);
-                System.out.println("-----------");
-            }
+        //     List<CursoDTO> todosLosCursos = blFactory.getAll();
+        //     for (CursoDTO curso : todosLosCursos) {
+        //         System.out.println(curso);
+        //         System.out.println("-----------");
+        //     }
 
-            CursoDTO cursoPorId = blFactory.getBy(1);
-            System.out.println(cursoPorId);
+        //     CursoDTO cursoPorId = blFactory.getBy(1);
+        //     System.out.println(cursoPorId);
 
-            cursoPorId.setNombre("Matemáticas Avanzadas");
-            blFactory.upd(cursoPorId);
+        //     cursoPorId.setNombre("Matemáticas Avanzadas");
+        //     blFactory.upd(cursoPorId);
 
-            blFactory.del(1);
+        //     blFactory.del(1);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
 
-        SplashScreenForm.mostarSplash();
-        MainForm frmMain  = new MainForm("PoliCursos");
-        frmMain.setVisible(true);
+    //}
+    //SplashScreenForm.mostarSplash();
+    MainForm frmMain  = new MainForm("PoliCursos");
+    frmMain.setVisible(true);
     }
 }
