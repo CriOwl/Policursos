@@ -8,6 +8,7 @@ import java.awt.Insets;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,17 +22,19 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import BusinessLogic.PersonaBL;
+import BusinessLogic.Entities.PersonaBL;
 import DataAccess.DTO.PersonaDTO;
 import UserInterface.CustomerControl.PoliButton;
 import UserInterface.CustomerControl.PoliLabel;
 import UserInterface.CustomerControl.PoliTextBox;
 
+/* 
 public class PoliPnlPersona extends JPanel implements ActionListener {
-    private Integer idPersona, idMaxPersona;
-    private PersonaBL personaBL = null;
-    private PersonaDTO persona = null;
-
+     * 
+     private Integer idPersona, idMaxPersona;
+     private PersonaBL personaBL = null;
+     private PersonaDTO persona = null;
+     
     public PoliPnlPersona()throws Exception {
         setGridBagLayot();
         loadData();
@@ -49,41 +52,31 @@ public class PoliPnlPersona extends JPanel implements ActionListener {
     private void loadData() throws Exception{
         idPersona = 1;
         personaBL = new PersonaBL();
-        persona = personaBL.getByidPersona(idPersona);
+        persona = personaBL.getByIdPersona(idPersona);
     }
 
     private void showData() throws Exception {
         boolean personaNull = (persona == null);
-        txtIdPersona.setText((personaNull)? "" : persona.getId_persona().toString());
-        txtNombre.setText((personaNull)? "" : persona.getNombre());
+        txtIdPersona.setText((personaNull)? " " : persona.getId_persona().toString());
+        txtNombre.setText((personaNull)? " " : persona.getNombre());
     }
 
     private void showTabla() throws Exception {
-        String[] header =   {   "Id", "Rol", "Sexo", 
-                                "Cedula", "Nombre", "Apellido", 
-                                "Correo", "Descripcion", "Clave",
-                                "Catálogo", "Fecha Nacimiento", "Estado", 
-                                "Fecha Creacion", "Fecha Actualización"
-                            };
-        Object[][] data = new Object[personaBL.getAll().size()][14];
+        String[] header = {   
+            "Cedula", "Nombre", "Apellido", 
+            "Correo", "Clave"
+        };
+        Object[][] data = new Object[personaBL.getAll().size()][6];
         int inicio = 0;
         for(PersonaDTO pDTO : personaBL.getAll()){
-            data[inicio][0]     = pDTO.getId_persona();
-            data[inicio][1]     = pDTO.getId_rol();
-            data[inicio][2]     = pDTO.getId_sexo();
-            data[inicio][3]     = pDTO.getCedula();
-            data[inicio][4]     = pDTO.getNombre();
-            data[inicio][5]     = pDTO.getApellido();
-            data[inicio][6]     = pDTO.getCorreo();
-            data[inicio][7]     = pDTO.getDescripcion();
-            data[inicio][8]     = pDTO.getClave();
-            data[inicio][9]     = pDTO.getId_catalogo_pais();
-            data[inicio][10]    = pDTO.getFecha_nacimiento();
-            data[inicio][11]    = pDTO.getEstado();
-            data[inicio][12]    = pDTO.getFecha_creacion();
-            data[inicio][13]    = pDTO.getFecha_modificacion();
+            data[inicio][0] = pDTO.getCedula();
+            data[inicio][1] = pDTO.getNombre();
+            data[inicio][2] = pDTO.getApellido();
+            data[inicio][3] = pDTO.getCorreo();
+            data[inicio][4] = pDTO.getClave();
             inicio++;
         }
+        
 
         JTable tabla = new JTable(data, header);
         
@@ -91,25 +84,25 @@ public class PoliPnlPersona extends JPanel implements ActionListener {
         tabla.setGridColor(Color.BLACK);
         tabla.setRowSelectionAllowed(true);
         tabla.setColumnSelectionAllowed(false);
-        tabla.setPreferredScrollableViewportSize(new Dimension(450, 500));
+        tabla.setPreferredSize(new Dimension(800, 300)); // Ajustar el tamaño preferido
         tabla.setFillsViewportHeight(true);
 
         pnlTabla.removeAll();
-        pnlTabla.add(tabla);
-        JScrollPane scrollPane = new JScrollPane(tabla);
-        pnlTabla.add(scrollPane);
+        pnlTabla.setLayout(new BorderLayout());
+        pnlTabla.add(tabla, BorderLayout.CENTER); // Añadir la tabla directamente al panel
+        pnlTabla.revalidate();
+        pnlTabla.repaint();
 
         tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
             @Override
             public void valueChanged(ListSelectionEvent e) {
-          
                 int col = 0;
                 int row = tabla.getSelectedRow();
                 String strIdPersona = tabla.getModel().getValueAt(row, col).toString();
 
                 idPersona = Integer.parseInt(strIdPersona);
                 try {
-                    persona = personaBL.getByidPersona(idPersona);
+                    persona = personaBL.getByIdPersona(idPersona);
                     showData(); 
                 } catch (Exception e1) { }  
                 System.out.println("Tabla.Selected: " + strIdPersona);
@@ -130,6 +123,7 @@ public class PoliPnlPersona extends JPanel implements ActionListener {
             showTabla();
         }
     }
+    
     private void btnGuardarClick(ActionEvent e) throws Exception {
         boolean sexoNull = (persona == null);
         if (JOptionPane.showConfirmDialog(this, "¿Seguro que desea guardar?", (sexoNull)?"Agregar...": "Actualizar...", 
@@ -184,17 +178,18 @@ public class PoliPnlPersona extends JPanel implements ActionListener {
         pnlBtnCRUD      = new JPanel(new FlowLayout()),
         pnlBtnPagina    = new JPanel(new FlowLayout());
 
-    private Border
+        private Border
         line = new LineBorder(Color.BLACK),
         margin = new EmptyBorder(5,5,5,5),
         border = new CompoundBorder(line, margin);
+        
 
 
-
-    public void setGridBagLayot(){
+        public void setGridBagLayot(){
         GridBagConstraints gbc = new GridBagConstraints();
         txtIdPersona.setEnabled(false);
 
+        //paginacion de la tabla
         pnlBtnPagina.add(btnAgregar);
         pnlBtnPagina.add(btnAnterior);
         pnlBtnPagina.add(new PoliLabel(" Page: [ "));      
@@ -202,13 +197,14 @@ public class PoliPnlPersona extends JPanel implements ActionListener {
         pnlBtnPagina.add(new PoliLabel(" ] "));      
         pnlBtnPagina.add(btnSiguiente);
         pnlBtnPagina.add(btnFinal);
-
+        
+        //CRUD
         pnlBtnCRUD.add(btnAgregar);
         pnlBtnCRUD.add(btnGuardar);
         pnlBtnCRUD.add(btnCancelar);
         pnlBtnCRUD.add(btnEliminar);
         pnlBtnCRUD.setBorder(border);
-
+        
         // GridBagConstraints.Separación entre componentes
         gbc.insets=new Insets(5,5,5,5);    
         
@@ -216,7 +212,7 @@ public class PoliPnlPersona extends JPanel implements ActionListener {
         gbc.gridy = 0;       gbc.gridx=0;  //| fila,  columna
         gbc.gridwidth=3;                   //| celdas a unir
         add(lblTitulo, gbc);               //| agrega el control
-
+        
         gbc.gridy = 1;       gbc.gridx=0;   
         gbc.gridwidth=1;                     
         add(new JLabel("■ Sección de datos: "), gbc);                 
@@ -235,24 +231,26 @@ public class PoliPnlPersona extends JPanel implements ActionListener {
         gbc.gridy = 3;       gbc.gridx=0;   
         gbc.gridwidth=3;  
         add(pnlBtnPagina, gbc);  
-
+        
         gbc.gridy = 4;       gbc.gridx=0; 
         gbc.gridwidth=1;    
         add(new JLabel("■ Sección de registro: "), gbc);  
-
+        
         gbc.gridy = 5;       gbc.gridx=0;     add(lblIdPersona,  gbc);   
         gbc.gridy = 5;       gbc.gridx=1;     add(txtIdPersona,  gbc);   
 
         gbc.gridy = 6;       gbc.gridx=0;     add(lblNombre, gbc);        
         gbc.gridy = 6;       gbc.gridx=1;     add(txtNombre, gbc);
         gbc.gridy = 6;       gbc.gridx=2;     add(new JLabel("*"), gbc);  
-
+        
         gbc.gridy = 7;       gbc.gridx=0;
         gbc.gridwidth=3;
         gbc.insets    = new Insets(30,0,0,0); 
         gbc.fill=GridBagConstraints.HORIZONTAL;
         add(pnlBtnCRUD, gbc);
-
+        
     }
     
 }
+
+*/

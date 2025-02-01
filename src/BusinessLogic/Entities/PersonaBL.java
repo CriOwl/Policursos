@@ -1,4 +1,4 @@
-package BusinessLogic;
+package BusinessLogic.Entities;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class PersonaBL {
         return personaDAO.readAll();
     }
 
-    public PersonaDTO getByidPersona(int idpersona) throws Exception{
+    public PersonaDTO getByIdPersona(int idpersona) throws Exception{
         persona = personaDAO.readBy(idpersona);
         return persona;
     }

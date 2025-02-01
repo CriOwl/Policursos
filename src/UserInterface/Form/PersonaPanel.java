@@ -5,13 +5,9 @@ import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableCellRenderer;
 
-import BusinessLogic.PersonaBL;
+import BusinessLogic.Entities.PersonaBL;
 import DataAccess.DTO.PersonaDTO;
 import UserInterface.PoliCursoStyle;
 import UserInterface.CustomerControl.PoliButton;
@@ -25,61 +21,111 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PersonaPanel extends JPanel implements ActionListener {
     private Integer idPersona = 0, idMaxPersona = 0;
     private PersonaBL personaBL = null;
     private PersonaDTO persona = null;
+    
 
     public PersonaPanel() {
         try {
             customizeComponent();
-            //metodos para cargar y mostrar datos de la tabla
             loadRow();
             showRow();
             showTabla();
             
-
             btnRowIni.addActionListener(this);
             btnRowAnt.addActionListener(this);
             btnRowSig.addActionListener(this);
             btnRowFin.addActionListener(this);
 
-
-            btnAgregar.addActionListener(       e -> btnAgregarClick());
-            btnEliminar.addActionListener(      e -> btnEliminarClick());
-            btnCancelar.addActionListener( e ->btnCancelarClick());
-            btnGuardar.addActionListener(       e -> btnGuardarClick());
+            btnAgregar.addActionListener(e -> btnAgregarClick());
+            btnEliminar.addActionListener(e -> btnEliminarClick());
+            btnCancelar.addActionListener(e -> btnCancelarClick());
+            btnGuardar.addActionListener(e -> btnGuardarClick());
             
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-
         }
     }
 
 
-    private void btnAgregarClick(){}
-    private void btnGuardarClick(){}
-    private void btnEliminarClick(){}
-    private void btnCancelarClick(){}
-   
     private void loadRow() throws Exception{
-        idPersona       = 1;
-        personaBL       = new PersonaBL();
-        persona         = personaBL.getByidPersona(idPersona);
-        idMaxPersona    = personaBL.getMaxRow();
+        idPersona = 1;
+        personaBL = new PersonaBL();
+        persona = personaBL.getByIdPersona(idPersona);
+        idMaxPersona = personaBL.getMaxRow();
     }
 
     private void showRow() throws Exception {
         boolean personaNull = (persona == null);
-        txtIdPersona.setText((personaNull)? "" : persona.getId_persona().toString());
-        txtNombre.setText((personaNull)? "" : persona.getNombre());
+        txtIdPersona.setText((personaNull)? " " : persona.getId_persona().toString());
+        txtNombre.setText((personaNull)? " " : persona.getNombre());
         lblRegistroTotal.setText(idPersona.toString()+ " de " + idMaxPersona.toString());
     }
+
+    private void btnAgregarClick() {
+        persona = null;
+        try {
+            showRow();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void btnGuardarClick(){
+        boolean personaNull = (persona == null);
+        try {
+            if (PoliCursoStyle.showConfirmYesNo(" ¿ Desea agregarlo? " + ((personaNull)? "Agregar?": "Actualizar?"))) {
+                if(personaNull){
+                    persona = new PersonaDTO(txtNombre.getText());
+                }else{
+                    persona.setNombre(txtNombre.getText());
+                }
+                if(!((personaNull) ? personaBL.create(persona): personaBL.update(persona)))
+                    PoliCursoStyle.showMsgError(" Inconvenientes en guardar!! ");
+                
+                loadRow();
+                showRow();
+                showTabla();
+            }
+        } catch (Exception e) {
+            PoliCursoStyle.showMsgError(e.getMessage());
+        }
+    }
+
+    private void btnEliminarClick(){
+        try {
+            if(PoliCursoStyle.showConfirmYesNo("¿Desea eliminarlo ?")){
+                if(!personaBL.delete(persona.getId_persona()))
+                throw new Exception(" Inconvenientes al eliminar!!");
+
+                loadRow();
+                showRow();
+                showTabla();
+            }
+        } catch (Exception e) {
+            PoliCursoStyle.showMsgError(e.getMessage());
+        }
+    }
+
+    private void btnCancelarClick(){
+        try {
+            if(persona == null){
+                loadRow();
+            }
+            showRow();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+   
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -92,141 +138,110 @@ public class PersonaPanel extends JPanel implements ActionListener {
         if (e.getSource() == btnRowFin)
             idPersona = idMaxPersona;
         try {
-            persona    = personaBL.getByidPersona(idPersona);
+            persona = personaBL.getByIdPersona(idPersona);
             showRow(); 
         } catch (Exception ex) {}
     }
 
     private void showTabla() throws Exception {
-        String[] header =   {   "Id", "Rol", "Sexo", 
-                                "Cedula", "Nombre", "Apellido", 
-                                "Correo", "Descripcion", "Clave",
-                                "Catálogo", "Fecha Nacimiento", "Estado", 
-                                "Fecha Creacion", "Fecha Actualización"
-                            };
-        Object[][] data = new Object[personaBL.getAll().size()][14];
+        String[] header = {   
+            "Cedula", "Nombre", "Apellido", 
+            "Correo", "Clave"
+        };
+        Object[][] data = new Object[personaBL.getAll().size()][6];
         int inicio = 0;
         for(PersonaDTO pDTO : personaBL.getAll()){
-            data[inicio][0]     = pDTO.getId_persona();
-            data[inicio][1]     = pDTO.getId_rol();
-            data[inicio][2]     = pDTO.getId_sexo();
-            data[inicio][3]     = pDTO.getCedula();
-            data[inicio][4]     = pDTO.getNombre();
-            data[inicio][5]     = pDTO.getApellido();
-            data[inicio][6]     = pDTO.getCorreo();
-            data[inicio][7]     = pDTO.getDescripcion();
-            data[inicio][8]     = pDTO.getClave();
-            data[inicio][9]     = pDTO.getId_catalogo_pais();
-            data[inicio][10]    = pDTO.getFecha_nacimiento();
-            data[inicio][11]    = pDTO.getEstado();
-            data[inicio][12]    = pDTO.getFecha_creacion();
-            data[inicio][13]    = pDTO.getFecha_modificacion();
+            data[inicio][0] = pDTO.getCedula();
+            data[inicio][1] = pDTO.getNombre();
+            data[inicio][2] = pDTO.getApellido();
+            data[inicio][3] = pDTO.getCorreo();
+            data[inicio][4] = pDTO.getClave();
             inicio++;
         }
 
+        // Create the table
         JTable tabla = new JTable(data, header);
         
-        // Ajustar alineación de celdas
-        DefaultTableCellRenderer render = new DefaultTableCellRenderer();
-        render.setHorizontalAlignment(SwingConstants.LEFT);
-        for (int i = 0; i < tabla.getColumnCount(); i++) {
-            tabla.getColumnModel().getColumn(i).setCellRenderer(render);
-        }
-        
         tabla.setShowHorizontalLines(true);
-        tabla.setGridColor(Color.BLACK);
+        tabla.setGridColor(Color.DARK_GRAY);
         tabla.setRowSelectionAllowed(true);
         tabla.setColumnSelectionAllowed(false);
-        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Desactivar el ajuste automático de tamaño
-        tabla.setPreferredScrollableViewportSize(new Dimension(2000, 300)); // Ajustar el tamaño preferido
+        tabla.setFillsViewportHeight(true);
+        tabla.setPreferredSize(new Dimension(440, 300)); // Aajustar el scroll
+        tabla.setFillsViewportHeight(true);
 
-        pnlTabla.setLayout(new BorderLayout());
-
-       // Agregar la tabla al panel
+        // agregar la tabla al JScrollPane
         JScrollPane scrollPane = new JScrollPane(tabla);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        
-        pnlTabla.setLayout(new BorderLayout());
+
+        // Añade el scrollPane al Panel
         pnlTabla.removeAll();
-        pnlTabla.add(scrollPane, BorderLayout.CENTER); // Asegurarse de que el scrollPane se agregue al centro
-    
-        pnlTabla.revalidate();
-        pnlTabla.repaint();
+        pnlTabla.add(scrollPane, BorderLayout.CENTER);
+        pnlTabla.revalidate(); // Add this line to refresh the panel
+        pnlTabla.repaint(); 
 
-        tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
+        tabla.addMouseListener(new MouseAdapter(){
             @Override
-            public void valueChanged(ListSelectionEvent e) {
-          
-                int col = 0;
-                int row = tabla.getSelectedRow();
-                String strIdPersona = tabla.getModel().getValueAt(row, col).toString();
-
-                idPersona = Integer.parseInt(strIdPersona);
-                try {
-                    persona = personaBL.getByidPersona(idPersona);
-                    showRow(); 
-                } catch (Exception e1) { }  
-                System.out.println("Tabla.Selected: " + strIdPersona);
+            public void mouseClicked(MouseEvent e){
+                int fila = tabla.rowAtPoint(e.getPoint());
+                int columna = tabla.columnAtPoint(e.getPoint());
+                if(fila >= 0 && columna >=0){
+                    String strIdPersona = tabla.getModel().getValueAt(fila, 0).toString();
+                    idPersona = Integer.parseInt(strIdPersona);
+                    try {
+                        persona = personaBL.getByIdPersona(idPersona);
+                        showRow();
+                    } catch (Exception ignored) {}
+                }
+                System.out.println(e);
             }
         });
-        
     }
 
-
-    //Diseños
-
-    private PoliLabel
-        lblTitulo           = new PoliLabel(" Persona"),
-        lblIdPersona        = new PoliLabel(" Código:"),
-        lblNombre           = new PoliLabel(" Desripción:"),
-        lblRegistroTotal    = new PoliLabel(" 0 de 0");
+    // Designs
+    private PoliLabel lblTitulo = new PoliLabel(" Persona"),
+        lblIdPersona = new PoliLabel(" Código:"),
+        lblNombre = new PoliLabel(" Desripción:"),
+        lblRegistroTotal = new PoliLabel(" 0 de 0");
         
-    private PoliTextBox
-        txtIdPersona        = new PoliTextBox(),
-        txtNombre           = new PoliTextBox();
+    private PoliTextBox txtIdPersona = new PoliTextBox(),
+        txtNombre = new PoliTextBox();
 
-    private PoliButton
-        btnPageIni      = new PoliButton(" |< "),
-        btnPageAnt      = new PoliButton(" << "),
-        btnPageSig      = new PoliButton(" >> "),
-        btnPageFin      = new PoliButton(" >| "),
+    private PoliButton btnPageIni = new PoliButton(" |< "),
+        btnPageAnt = new PoliButton(" << "),
+        btnPageSig = new PoliButton(" >> "),
+        btnPageFin = new PoliButton(" >| "),
+        btnRowIni = new PoliButton(" |< "),
+        btnRowAnt = new PoliButton(" << "),
+        btnRowSig = new PoliButton(" >> "),
+        btnRowFin = new PoliButton(" >| "),
+        btnAgregar = new PoliButton("Agregar"),
+        btnGuardar = new PoliButton("Guardar"),
+        btnEliminar = new PoliButton("Eliminar"),
+        btnCancelar = new PoliButton("Cancelar");
 
-        btnRowIni       = new PoliButton(" |< "),
-        btnRowAnt       = new PoliButton(" << "),
-        btnRowSig       = new PoliButton(" >> "),
-        btnRowFin       = new PoliButton(" >| "),
-
-        btnAgregar      = new PoliButton("Agregar"),
-        btnGuardar      = new PoliButton("Guardar"),
-        btnEliminar     = new PoliButton("Eliminar"),
-        btnCancelar     = new PoliButton("Cancelar");
-
-    private JPanel
-        pnlTabla    = new JPanel(),
-        pnlBtnRow   = new JPanel(new FlowLayout()),
-        pnlBtnPage  = new JPanel(new FlowLayout()),
-        pnlBtnCRUD  = new JPanel(new FlowLayout());
+    private JPanel pnlTabla = new JPanel(),
+        pnlBtnRow = new JPanel(new FlowLayout()),
+        pnlBtnPage = new JPanel(new FlowLayout()),
+        pnlBtnCRUD = new JPanel(new FlowLayout());
         
-    
     public void customizeComponent(){
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.CENTER;
 
-        txtIdPersona.setEnabled(true);
+        txtIdPersona.setEnabled(false);
         txtNombre.setBorderLine();
 
         pnlBtnPage.add(btnPageIni);
         pnlBtnPage.add(btnPageAnt);
-        pnlBtnPage.add(new PoliLabel(" Page:( "));
-        pnlBtnPage.add(lblRegistroTotal); 
+        pnlBtnPage.add(new PoliLabel(" Pagina:( "));
+        pnlBtnPage.add(lblRegistroTotal);
         pnlBtnPage.add(new PoliLabel(" ) "));
         pnlBtnPage.add(btnPageSig);
         pnlBtnPage.add(btnPageFin);
 
-        pnlBtnRow.add(btnRowIni);
-        pnlBtnRow.add(btnRowAnt);
+        pnlBtnRow.add(btnRowIni); 
+        pnlBtnRow.add(btnRowAnt); 
         pnlBtnRow.add(lblRegistroTotal);
         pnlBtnRow.add(btnRowSig);
         pnlBtnRow.add(btnRowFin);
@@ -235,28 +250,27 @@ public class PersonaPanel extends JPanel implements ActionListener {
         pnlBtnCRUD.add(btnGuardar);
         pnlBtnCRUD.add(btnEliminar);
         pnlBtnCRUD.add(btnCancelar);
-        pnlBtnCRUD.setLayout(new GridLayout(1, 4, 10, 10));  //agrega espacios entre botones
-
+    
         pnlBtnCRUD.setBorder(BorderFactory.createTitledBorder(
-            BorderFactory.createLineBorder(Color.GRAY), // Borde de color gris
-            "Acciones", // Título del borde
-            TitledBorder.CENTER, // Alineación del título
-            TitledBorder.TOP, // Posición del título
-            new Font("Comic Sans MS", Font.BOLD, 12), // Fuente del título
-            Color.DARK_GRAY // Color del texto del título
-            )   
-        );
+            BorderFactory.createLineBorder(Color.GRAY),
+            "Acciones",
+            TitledBorder.CENTER,
+            TitledBorder.TOP,
+            new Font("Comic Sans MS", Font.BOLD, 12),
+            Color.DARK_GRAY
+        ));
 
-
-        gbc.insets = new Insets(15, 15, 15, 15);
-
-        gbc.gridy = 0;
+        gbc.insets = new Insets(5, 5, 5, 5);
+       
+        //posicioanar Persona Titulo
         gbc.gridx = 0;
-        gbc.gridwidth = 5;
+        gbc.gridx = 0;
+        gbc.gridwidth = 2;
         add(lblTitulo, gbc);
 
+        //posicionar seccion 
         gbc.gridy = 1;
-        gbc.gridx = -1;
+        gbc.gridx = 0;
         gbc.gridwidth = 1;
         add(new PoliLabel("■ Sección de datos: "), gbc);
         gbc.gridy = 1;
@@ -268,7 +282,30 @@ public class PersonaPanel extends JPanel implements ActionListener {
         gbc.gridwidth = 3;
         gbc.ipady = 150;
         gbc.ipadx = 450;
-        pnlTabla.add(new PoliLabel(" Cargando información..."));
+        pnlTabla.setLayout(new BorderLayout());
+        add(pnlTabla, gbc);
+
+        gbc.ipady = 1;
+        gbc.ipadx = 1;
+
+        // pagina
+        gbc.gridy = 3;
+        gbc.gridx = 8;
+        gbc.gridwidth = 3;
+        gbc.insets = new Insets(25,0 , 0, 0); // cambian la posicion de todo
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        add(Box.createRigidArea(new Dimension(12, 20)), gbc);
+
+        gbc.insets = new Insets(10, 0, 0, 0);
+        
+        //ajustar la tabla
+        gbc.gridy = 2;
+        gbc.gridx = 0;
+        gbc.gridwidth = 5;
+        gbc.ipady = 200;
+        gbc.ipadx = 750;
+        gbc.fill = GridBagConstraints.BOTH; // Asegurarse de que el componente se expanda en ambas direcciones
+        pnlTabla.setLayout(new BorderLayout()); // Asegurarse de que el panel tenga un BorderLayout
         add(pnlTabla, gbc);
 
         gbc.ipady = 1;
@@ -276,7 +313,7 @@ public class PersonaPanel extends JPanel implements ActionListener {
 
         gbc.gridy = 3;
         gbc.gridx = 0;
-        gbc.gridwidth = 3;
+        gbc.gridwidth = 5;
         gbc.insets = new Insets(25, 0, 0, 0);  // Ajusta el valor superior a 50
         gbc.fill = GridBagConstraints.HORIZONTAL;
         add(Box.createRigidArea(new Dimension(5, 5)), gbc);
@@ -289,10 +326,13 @@ public class PersonaPanel extends JPanel implements ActionListener {
         add(new PoliLabel("■ Sección de registro: "), gbc);
         gbc.gridy = 4;
         gbc.gridx = 1;
+        gbc.gridwidth = 1; // Asegurarse de que el panel de botones de fila se alinee con el título
         add(pnlBtnRow, gbc);
 
+        //Id Persona == codigo
         gbc.gridy = 5;
         gbc.gridx = 0;
+        gbc.gridwidth = 1;
         add(lblIdPersona, gbc);
         gbc.gridy = 5;
         gbc.gridx = 1;
@@ -300,8 +340,10 @@ public class PersonaPanel extends JPanel implements ActionListener {
         gbc.gridwidth = GridBagConstraints.REMAINDER; // Indica que este componente ocupa toda la fila
         add(txtIdPersona, gbc);
 
+        //descripcion
         gbc.gridy = 6;
         gbc.gridx = 0;
+        gbc.gridwidth = 1;
         add(lblNombre, gbc);
         gbc.gridy = 6;
         gbc.gridx = 1;
@@ -312,7 +354,7 @@ public class PersonaPanel extends JPanel implements ActionListener {
        
         gbc.gridy = 7;
         gbc.gridx = 0;
-        gbc.gridwidth = 3;
+        gbc.gridwidth = 5;
         gbc.insets = new Insets(30, 0, 0, 0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         add(pnlBtnCRUD, gbc);

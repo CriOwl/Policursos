@@ -32,12 +32,14 @@ public class MainForm extends JFrame{
         setTitle(titleApp);
         setSize(1000, 650);
         setResizable(false);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); //centralizacion de la pantalla
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        //contenedor para los paneles
         Container container = getContentPane();
         container.setLayout(new BorderLayout());
-
+        
+        //agregar los paneles
         container.add(pnlMenu, BorderLayout.WEST);
         container.add(pnlMain, BorderLayout.CENTER);
 

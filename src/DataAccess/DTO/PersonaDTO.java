@@ -20,6 +20,10 @@ public class PersonaDTO {
     
     
     public PersonaDTO(){}
+
+    public PersonaDTO(String nombre){
+        this.Nombre = nombre;
+    }
     
     public PersonaDTO(Integer id_rol, Integer id_sexo, String cedula, String nombre,
     String apellido, String clave, Integer id_catalogo_pais) {

@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.net.URL;
 
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -14,6 +15,8 @@ import javax.swing.border.LineBorder;
 public abstract class PoliCursoStyle {
     
     //Colores
+    public static final Color COLOR_FONDO_VERDE = new Color(34, 139, 34);
+    public static final Color COLOR_FONDO_BLANCO = new Color(240, 248, 255);
     public static final Color COLOR_FONT = new Color(80, 100, 20);
     public static final Color COLOR_FONT_LIGHT = new Color(100, 100, 100);
     public static final Color COLOR_CURSOR = Color.BLACK;
@@ -42,6 +45,18 @@ public abstract class PoliCursoStyle {
             new LineBorder(Color.LIGHT_GRAY), new EmptyBorder(25,25,25,25));
     }
 
+    public static final void showMsg(String msg) {
+        JOptionPane.showMessageDialog(null, msg, " 🦁 Curso", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public static final void showMsgError(String msg) {
+        JOptionPane.showMessageDialog(null, msg, "🦁 Curso", JOptionPane.OK_CANCEL_OPTION);
+    }
+
+    public static final boolean showConfirmYesNo(String msg) {
+        return (JOptionPane.showConfirmDialog(null, msg, "🤡 Curso",
+                JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION);
+    }
 
     
 

@@ -32,6 +32,7 @@ public class MenuPanel extends JPanel{
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // posicionar en el eje y, verticalmente
         setPreferredSize(new Dimension(150, getHeight()));
 
+        //añadir el logo
         try {
             Image logo = ImageIO.read(PoliCursoStyle.URL_LOGO);
             logo = logo.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
