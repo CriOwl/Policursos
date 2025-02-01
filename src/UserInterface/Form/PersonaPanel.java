@@ -170,7 +170,7 @@ public class PersonaPanel extends JPanel implements ActionListener {
         tabla.setRowSelectionAllowed(true);
         tabla.setColumnSelectionAllowed(false);
         tabla.setFillsViewportHeight(true);
-        tabla.setPreferredSize(new Dimension(440, 300)); // Aajustar el scroll
+        //tabla.setPreferredSize(new Dimension(440, 495)); // Aajustar el scroll
         tabla.setFillsViewportHeight(true);
 
         // agregar la tabla al JScrollPane
