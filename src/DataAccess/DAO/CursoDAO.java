@@ -155,7 +155,7 @@ public class CursoDAO extends SQLiteDataHelper implements IDAO<CursoDTO>{
         try {
             Connection          conn = openConnection();
             PreparedStatement  pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, "X");
+            pstmt.setString(1, "I");
             pstmt.setInt(2, id);
             pstmt.executeUpdate();
             return true;

@@ -162,7 +162,7 @@ public class PersonaPanel extends JPanel implements ActionListener {
             inicio++;
         }
 
-        // Create the table
+        // Crear la tabla
         JTable tabla = new JTable(data, header);
 
         tabla.setShowHorizontalLines(true);
@@ -170,7 +170,6 @@ public class PersonaPanel extends JPanel implements ActionListener {
         tabla.setRowSelectionAllowed(true);
         tabla.setColumnSelectionAllowed(false);
         tabla.setFillsViewportHeight(true);
-        tabla.setPreferredSize(new Dimension(440, 300)); // Aajustar el scroll
         tabla.setFillsViewportHeight(true);
 
         // agregar la tabla al JScrollPane
@@ -201,7 +200,7 @@ public class PersonaPanel extends JPanel implements ActionListener {
         });
     }
 
-    // Designs
+    // Diseños
     private PoliLabel lblTitulo = new PoliLabel(" Persona"),
             lblIdPersona = new PoliLabel(" Código:"),
             lblNombre = new PoliLabel(" Desripción:"),
@@ -251,9 +250,7 @@ public class PersonaPanel extends JPanel implements ActionListener {
         pnlBtnRow.add(btnRowFin);
 
         pnlBtnCRUD.add(btnAgregar);
-        pnlBtnCRUD.add(btnGuardar);
         pnlBtnCRUD.add(btnEliminar);
-        pnlBtnCRUD.add(btnCancelar);
 
         pnlBtnCRUD.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(Color.GRAY),
@@ -279,17 +276,6 @@ public class PersonaPanel extends JPanel implements ActionListener {
         gbc.gridy = 1;
         gbc.gridx = 1;
         add(pnlBtnPage, gbc);
-
-        gbc.gridy = 2;
-        gbc.gridx = 0;
-        gbc.gridwidth = 3;
-        gbc.ipady = 150;
-        gbc.ipadx = 450;
-        pnlTabla.setLayout(new BorderLayout());
-        add(pnlTabla, gbc);
-
-        gbc.ipady = 1;
-        gbc.ipadx = 1;
 
         // pagina
         gbc.gridy = 3;

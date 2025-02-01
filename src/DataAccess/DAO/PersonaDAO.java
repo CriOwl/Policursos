@@ -30,7 +30,6 @@ public class PersonaDAO extends SQLiteDataHelper implements IDAO<PersonaDTO>{
                      +" ,Clave        "
                      +" ,Id_catalogo_pais   "
                      +" ,Fecha_nacimiento   "
-
                      +" ,Estado        " 
                      +" ,Fecha_creacion     " 
                      +" ,Fecha_modificacion "
@@ -183,7 +182,7 @@ public class PersonaDAO extends SQLiteDataHelper implements IDAO<PersonaDTO>{
         try {
             Connection          conn = openConnection();
             PreparedStatement  pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, "X");
+            pstmt.setString(1, "I");
             pstmt.setInt(2, id);
             pstmt.executeUpdate();
             return true;

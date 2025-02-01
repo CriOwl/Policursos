@@ -123,7 +123,7 @@ public class NotaDAO extends SQLiteDataHelper implements IDAO<NotaDTO>{
         try {
             Connection          conn = openConnection();
             PreparedStatement  pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, "X");
+            pstmt.setString(1, "I");
             pstmt.setInt(2, id);
             pstmt.executeUpdate();
             return true;

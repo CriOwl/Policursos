@@ -114,7 +114,7 @@ public class CatalogoTipoDAO extends SQLiteDataHelper implements IDAO<CatalogoTi
         try {
             Connection          conn = openConnection();
             PreparedStatement  pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, "X");
+            pstmt.setString(1, "I");
             pstmt.setInt(2, id);
             pstmt.executeUpdate();
             return true;
