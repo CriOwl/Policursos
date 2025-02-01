@@ -11,6 +11,7 @@ import DataAccess.DTO.PersonaDTO;
 import UserInterface.CustomerControl.*;
 import BusinessLogic.Entities.PersonaBL;
 
+
 import javax.swing.JOptionPane;
 
 
@@ -19,9 +20,11 @@ public class PersonaDialog extends JDialog {
     private JTextField txtCedula, txtNombre, txtApellido, txtCorreo, txtDescripcion, txtClave, txtFechaNacimiento;
     private JComboBox<String> cmbRol, cmbSexo, cmbPais;
     private JButton btnGuardar, btnCancelar;
+    private PersonaPanel personaPanel;
 
-    public PersonaDialog(JFrame parent) {
+    public PersonaDialog(JFrame parent, PersonaPanel personaPanel) {
         super(parent, "Agregar Persona", true);
+        this.personaPanel = personaPanel;
         setSize(700, 700);
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
@@ -105,6 +108,7 @@ public class PersonaDialog extends JDialog {
 
             if (resultado) {
                 JOptionPane.showMessageDialog(this, "✅ Persona agregada correctamente.");
+                personaPanel.updateTable(); // Llama al nuevo método
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "❌ Error al agregar la persona.");

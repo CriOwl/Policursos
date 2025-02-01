@@ -37,9 +37,7 @@ public class PersonaPanel extends JPanel implements ActionListener {
     public PersonaPanel() {
         try {
             customizeComponent();
-            loadRow();
-            showRow();
-            showTabla();
+            updateTable();
 
             btnRowIni.addActionListener(this);
             btnRowAnt.addActionListener(this);
@@ -56,6 +54,12 @@ public class PersonaPanel extends JPanel implements ActionListener {
         }
     }
 
+    public void updateTable() throws Exception {
+        loadRow();
+        showRow();
+        showTabla();
+    }
+
     private void loadRow() throws Exception {
         idPersona = 1;
         personaBL = new PersonaBL();
@@ -68,82 +72,6 @@ public class PersonaPanel extends JPanel implements ActionListener {
         txtIdPersona.setText((personaNull) ? " " : persona.getId_persona().toString());
         txtNombre.setText((personaNull) ? " " : persona.getNombre());
         lblRegistroTotal.setText(idPersona.toString() + " de " + idMaxPersona.toString());
-    }
-
-    private void btnAgregarClick() {
-        // persona = null;
-        // try {
-        // showRow();
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
-        PersonaDialog dialog = new PersonaDialog((JFrame) SwingUtilities.getWindowAncestor(this));
-        dialog.setVisible(true);
-    }
-
-    private void btnGuardarClick() {
-        boolean personaNull = (persona == null);
-        try {
-            if (PoliCursoStyle
-                    .showConfirmYesNo(" ¿ Desea agregarlo? " + ((personaNull) ? "Agregar?" : "Actualizar?"))) {
-                if (personaNull) {
-                    persona = new PersonaDTO(txtNombre.getText());
-                } else {
-                    persona.setNombre(txtNombre.getText());
-                }
-                if (!((personaNull) ? personaBL.create(persona) : personaBL.update(persona)))
-                    PoliCursoStyle.showMsgError(" Inconvenientes en guardar!! ");
-
-                loadRow();
-                showRow();
-                showTabla();
-            }
-        } catch (Exception e) {
-            PoliCursoStyle.showMsgError(e.getMessage());
-        }
-    }
-
-    private void btnEliminarClick() {
-        try {
-            if (PoliCursoStyle.showConfirmYesNo("¿Desea eliminarlo ?")) {
-                if (!personaBL.delete(persona.getId_persona()))
-                    throw new Exception(" Inconvenientes al eliminar!!");
-
-                loadRow();
-                showRow();
-                showTabla();
-            }
-        } catch (Exception e) {
-            PoliCursoStyle.showMsgError(e.getMessage());
-        }
-    }
-
-    private void btnCancelarClick() {
-        try {
-            if (persona == null) {
-                loadRow();
-            }
-            showRow();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == btnRowIni)
-            idPersona = 1;
-        if (e.getSource() == btnRowAnt && (idPersona > 1))
-            idPersona--;
-        if (e.getSource() == btnRowSig && (idPersona < idMaxPersona))
-            idPersona++;
-        if (e.getSource() == btnRowFin)
-            idPersona = idMaxPersona;
-        try {
-            persona = personaBL.getByIdPersona(idPersona);
-            showRow();
-        } catch (Exception ex) {
-        }
     }
 
     private void showTabla() throws Exception {
@@ -198,6 +126,72 @@ public class PersonaPanel extends JPanel implements ActionListener {
                 System.out.println(e);
             }
         });
+    }
+
+    private void btnAgregarClick() {
+        PersonaDialog dialog = new PersonaDialog((JFrame) SwingUtilities.getWindowAncestor(this), this);
+        dialog.setVisible(true);
+    }
+
+    private void btnGuardarClick() {
+        boolean personaNull = (persona == null);
+        try {
+            if (PoliCursoStyle
+                    .showConfirmYesNo(" ¿ Desea agregarlo? " + ((personaNull) ? "Agregar?" : "Actualizar?"))) {
+                if (personaNull) {
+                    persona = new PersonaDTO(txtNombre.getText());
+                } else {
+                    persona.setNombre(txtNombre.getText());
+                }
+                if (!((personaNull) ? personaBL.create(persona) : personaBL.update(persona)))
+                    PoliCursoStyle.showMsgError(" Inconvenientes en guardar!! ");
+
+                updateTable();
+            }
+        } catch (Exception e) {
+            PoliCursoStyle.showMsgError(e.getMessage());
+        }
+    }
+
+    private void btnEliminarClick() {
+        try {
+            if (PoliCursoStyle.showConfirmYesNo("¿Desea eliminarlo ?")) {
+                if (!personaBL.delete(persona.getId_persona()))
+                    throw new Exception(" Inconvenientes al eliminar!!");
+
+                updateTable();
+            }
+        } catch (Exception e) {
+            PoliCursoStyle.showMsgError(e.getMessage());
+        }
+    }
+
+    private void btnCancelarClick() {
+        try {
+            if (persona == null) {
+                loadRow();
+            }
+            showRow();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnRowIni)
+            idPersona = 1;
+        if (e.getSource() == btnRowAnt && (idPersona > 1))
+            idPersona--;
+        if (e.getSource() == btnRowSig && (idPersona < idMaxPersona))
+            idPersona++;
+        if (e.getSource() == btnRowFin)
+            idPersona = idMaxPersona;
+        try {
+            persona = personaBL.getByIdPersona(idPersona);
+            showRow();
+        } catch (Exception ex) {
+        }
     }
 
     // Diseños
