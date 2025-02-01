@@ -114,7 +114,7 @@ public class PersonaDAO extends SQLiteDataHelper implements IDAO<PersonaDTO>{
 
     @Override
     public boolean create(PersonaDTO entity) throws Exception {
-        String query = " INSERT INTO Persona (Id_rol,Id_sexo,Cedula,Nombre,Apellido,Clave, Id_catalogo_pais) VALUES (?,?,?,?,?,?,?)";
+        String query = " INSERT INTO Persona (Id_rol, Id_sexo, Cedula, Nombre, Apellido, Correo, Descripcion, Clave, Id_catalogo_pais, Fecha_nacimiento) VALUES (?,?,?,?,?,?,?,?,?,?)";
         try {
             Connection        conn  = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -123,8 +123,11 @@ public class PersonaDAO extends SQLiteDataHelper implements IDAO<PersonaDTO>{
             pstmt.setString(3, entity.getCedula());     //Cedula
             pstmt.setString(4, entity.getNombre());     //Nombre
             pstmt.setString(5, entity.getApellido());     //Apellido
-            pstmt.setString(6, entity.getClave());       //Clave
-            pstmt.setInt(7, entity.getId_catalogo_pais());       // Id_pais
+            pstmt.setString(6, entity.getCorreo());         // Correo
+            pstmt.setString(7, entity.getDescripcion());   //Descripcion
+            pstmt.setString(8, entity.getClave());       //Clave
+            pstmt.setInt(9, entity.getId_catalogo_pais());       // Id_pais
+            pstmt.setString(10, entity.getFecha_nacimiento()); //Fecha_nacimiento
             pstmt.executeUpdate();
             return true;
         } 
