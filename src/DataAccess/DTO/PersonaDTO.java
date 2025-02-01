@@ -26,14 +26,17 @@ public class PersonaDTO {
     }
     
     public PersonaDTO(Integer id_rol, Integer id_sexo, String cedula, String nombre,
-    String apellido, String clave, Integer id_catalogo_pais) {
+    String apellido, String correo, String descripcion, String clave, Integer id_catalogo_pais, String fecha_nacimiento) {
         this.Id_rol = id_rol;
         this.Id_sexo = id_sexo;
         this.Cedula = cedula;
         this.Nombre = nombre;
         this.Apellido = apellido;
+        this.Correo = correo;
+        this.Descripcion = descripcion;
         this.Clave = clave;
         this.Id_catalogo_pais = id_catalogo_pais;
+        this.Fecha_nacimiento = fecha_nacimiento;
     }
     
     
