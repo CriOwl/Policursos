@@ -114,6 +114,7 @@ public class PersonaDialog extends JDialog {
                 JOptionPane.showMessageDialog(this, "❌ Error al agregar la persona.");
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "❌ Error: " + e.getMessage()); // Add exception handling
         }
 
     }

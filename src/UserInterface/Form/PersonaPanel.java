@@ -64,7 +64,7 @@ public class PersonaPanel extends JPanel implements ActionListener {
         idPersona = 1;
         personaBL = new PersonaBL();
         persona = personaBL.getByIdPersona(idPersona);
-        idMaxPersona = personaBL.getMaxRow();
+        idMaxPersona = personaBL.getMaxRow(); // Asegúrate de que este valor sea correcto
     }
 
     private void showRow() throws Exception {
@@ -97,7 +97,6 @@ public class PersonaPanel extends JPanel implements ActionListener {
         tabla.setGridColor(Color.DARK_GRAY);
         tabla.setRowSelectionAllowed(true);
         tabla.setColumnSelectionAllowed(false);
-        tabla.setFillsViewportHeight(true);
         tabla.setFillsViewportHeight(true);
 
         // agregar la tabla al JScrollPane
@@ -258,7 +257,6 @@ public class PersonaPanel extends JPanel implements ActionListener {
 
         // posicioanar Persona Titulo
         gbc.gridx = 0;
-        gbc.gridx = 0;
         gbc.gridwidth = 2;
         add(lblTitulo, gbc);
 
@@ -342,3 +340,4 @@ public class PersonaPanel extends JPanel implements ActionListener {
         add(pnlBtnCRUD, gbc);
     }
 }
+
